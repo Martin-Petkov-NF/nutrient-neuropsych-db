@@ -45,11 +45,13 @@ Three forms, and you cannot pick the wrong one.
 ### What happens after you submit
 
 1. You fill in the form. That is your whole job.
-2. Automatic checks run within a minute. They confirm the paper's identifier is real and resolves to an actual record, that the entry is not a duplicate, and that the fields are filled in properly.
-3. A reviewer reads the source and either accepts it, asks you a question, or declines it with a reason.
-4. Accepted entries are marked verified and given an evidence grade.
+2. **Within about a minute, automatic checks run and reply to you.** They confirm the paper exists, that it has not been retracted, that it is not already here, and that the details are right. The details are taken from the PubMed record rather than from what you typed, so you cannot get them wrong.
+3. **If everything passes, the entry is added immediately** and marked *not yet read*.
+4. A reviewer later reads the paper, grades the evidence, and marks it verified.
 
-Nothing is accepted silently and nothing is rejected silently. If we decline something you sent, you will be told why.
+If a check fails you get told exactly what is wrong, in the issue, straight away. Edit the issue and the checks run again. Nothing sits in a queue waiting for someone to tell you there was a typo.
+
+**What "not yet read" means.** The machine has confirmed the paper is real and correctly described in the mechanical sense. It has not read the paper, so it cannot know whether your one-sentence summary matches what the paper found. That is the one judgement a person still makes, and it is the whole reason this collection is worth anything.
 
 ---
 
@@ -133,6 +135,22 @@ Twenty-three, documented in [CONTRIBUTING.md](CONTRIBUTING.md). The three that d
 - `headline_phrase`, one sentence in the contributor's own words saying what the paper found. It is the first thing a reader sees.
 - `direction`, whether the paper supports, does not support, or is neutral on the claim.
 - `evidence_grade`, set by a reviewer rather than by the contributor.
+
+### Automatic intake
+
+`scripts/intake.mjs` turns a submitted citation issue into rows. It rejects a submission that has no identifier, an identifier that does not resolve, **a retracted paper**, a duplicate, a value outside the vocabulary, or a publication type that is commentary rather than evidence. It flags, without rejecting, a study design that disagrees with PubMed's classification, an animal-only study, and a headline that is just the paper title copied.
+
+Everything it accepts lands as `unreviewed`. It never sets an evidence grade, because that needs someone to read the paper.
+
+Test it against a saved issue body:
+
+```bash
+node scripts/intake.mjs --body-file issue.md --dry-run
+```
+
+**To switch intake from opening a pull request to committing directly**, add a repository secret named `INTAKE_TOKEN` holding a personal access token with `repo` scope, belonging to an account with admin on this repository. The workflow detects it and changes mode on its own.
+
+Without that secret the workflow still runs every check and opens a ready-to-merge pull request instead, which is one click. GitHub does not allow the Actions bot to bypass branch protection on a personal repository, only in an organization, so a token is the only route to a genuine auto-merge here.
 
 ### Review settings
 

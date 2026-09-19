@@ -65,13 +65,19 @@ lines.push('');
 lines.push('**What the columns mean.** "What it says" is the contributor\'s one-sentence summary.');
 lines.push('"Finding" is whether the paper supports the claim, fails to support it, or found nothing.');
 lines.push('"Strength" is the reviewer\'s grade of how good the evidence is.');
+lines.push('"Checked" says whether a person has read the paper yet.');
+lines.push('');
+lines.push('**An entry marked "not yet read" passed the automatic checks and nothing more.** The paper');
+lines.push('exists, it has not been retracted, it is not a duplicate, and its details came from the');
+lines.push('PubMed record rather than being retyped. Nobody has confirmed that the summary describes');
+lines.push('what the paper actually found. Treat those entries with more caution than verified ones.');
 lines.push('');
 
 for (const [nutrient, items] of [...byNutrient.entries()].sort()) {
   lines.push(`## ${nutrient} (${items.length})`);
   lines.push('');
-  lines.push('| # | What it says | Finding | Strength | Source |');
-  lines.push('|---|---|---|---|---|');
+  lines.push('| # | What it says | Finding | Strength | Checked | Source |');
+  lines.push('|---|---|---|---|---|---|');
   for (const r of items.sort((a, b) => Number(cell(a, 'id')) - Number(cell(b, 'id')))) {
     const pmid = cell(r, 'pmid');
     const doi = cell(r, 'doi');
@@ -80,7 +86,11 @@ for (const [nutrient, items] of [...byNutrient.entries()].sort()) {
       ? `[${year}](https://pubmed.ncbi.nlm.nih.gov/${pmid}/)`
       : doi ? `[${year}](https://doi.org/${doi})` : year;
     const design = cell(r, 'study_design').replace(/-/g, ' ');
-    lines.push(`| ${cell(r, 'id')} | ${esc(cell(r, 'headline_phrase'))} | ${DIRECTION[cell(r, 'direction')] ?? cell(r, 'direction')} | ${cell(r, 'evidence_grade') || 'ungraded'} | ${link}, ${design} |`);
+    const st = cell(r, 'review_status');
+    const status = st === 'verified' ? 'verified'
+      : st === 'unreviewed' ? '⚠️ **not yet read**'
+      : st === 'needs-work' ? '⚠️ needs work' : st;
+    lines.push(`| ${cell(r, 'id')} | ${esc(cell(r, 'headline_phrase'))} | ${DIRECTION[cell(r, 'direction')] ?? cell(r, 'direction')} | ${cell(r, 'evidence_grade') || 'ungraded'} | ${status} | ${link}, ${design} |`);
   }
   lines.push('');
 }

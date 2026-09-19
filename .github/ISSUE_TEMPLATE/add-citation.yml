@@ -1,7 +1,7 @@
 name: Add a citation
 description: Suggest a paper for the database. No GitHub or coding knowledge needed.
 title: "[citation] "
-labels: ["new citation", "needs review"]
+labels: ["new citation"]
 body:
   - type: markdown
     attributes:

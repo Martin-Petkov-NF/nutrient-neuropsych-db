@@ -1,0 +1,171 @@
+name: Citation intake
+
+# Turns an accepted "Add a citation" issue into rows in the database.
+#
+# Entries that pass every mechanical check are added automatically with
+# review_status = unreviewed. That status is the honest part: the machine has
+# confirmed the paper exists, is not retracted, is not a duplicate and is
+# described with allowed values. It has not read the paper. A person promotes
+# unreviewed to verified and sets the evidence grade.
+
+on:
+  issues:
+    types: [opened, edited, labeled]
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: Issue number to reprocess
+        required: true
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  intake:
+    # Only citation submissions. Other issue types are left alone.
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      contains(github.event.issue.labels.*.name, 'new citation')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Decide which token to use
+        id: tok
+        env:
+          INTAKE_TOKEN: ${{ secrets.INTAKE_TOKEN }}
+        run: |
+          if [ -n "$INTAKE_TOKEN" ]; then
+            echo "mode=direct" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=pr" >> "$GITHUB_OUTPUT"
+          fi
+          echo "Mode: $( [ -n "$INTAKE_TOKEN" ] && echo 'direct commit to main' || echo 'open a pull request' )"
+
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.INTAKE_TOKEN || github.token }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Load the issue
+        id: issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ github.event.issue.number || inputs.issue }}
+        run: |
+          gh issue view "$NUM" --repo "$GITHUB_REPOSITORY" --json body,author \
+            --jq '.body' > /tmp/issue.md
+          echo "number=$NUM" >> "$GITHUB_OUTPUT"
+          gh issue view "$NUM" --repo "$GITHUB_REPOSITORY" --json author \
+            --jq '.author.login' > /tmp/author.txt
+          echo "author=$(cat /tmp/author.txt)" >> "$GITHUB_OUTPUT"
+
+      - name: Run the checks
+        id: intake
+        continue-on-error: true
+        env:
+          SUBMITTER: ${{ steps.issue.outputs.author }}
+        run: node scripts/intake.mjs --body-file /tmp/issue.md --json /tmp/verdict.json
+
+      - name: Rebuild the reading view
+        if: steps.intake.outputs.accepted == 'true'
+        run: node scripts/build-browse.mjs
+
+      - name: Re-run the full validator
+        if: steps.intake.outputs.accepted == 'true'
+        run: node scripts/validate.mjs data/citations.csv
+
+      # ---------------------------------------------------------------- accept
+
+      - name: Commit straight to main
+        if: steps.intake.outputs.accepted == 'true' && steps.tok.outputs.mode == 'direct'
+        env:
+          NUM: ${{ steps.issue.outputs.number }}
+        run: |
+          git config user.name "citation-intake[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/citations.csv docs/browse.md
+          git commit -m "Add citation from #${NUM} (unreviewed)" \
+            -m "Automatic intake. Checks passed: identifier resolves, not retracted, not a duplicate, values in vocabulary, metadata taken from the PubMed record. Nobody has read the paper yet, so review_status is unreviewed." \
+            -m "Closes #${NUM}"
+          git push
+
+      - name: Open a pull request instead
+        if: steps.intake.outputs.accepted == 'true' && steps.tok.outputs.mode == 'pr'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ steps.issue.outputs.number }}
+        run: |
+          BR="intake/issue-${NUM}"
+          git config user.name "citation-intake[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BR"
+          git add data/citations.csv docs/browse.md
+          git commit -m "Add citation from #${NUM} (unreviewed)"
+          git push -u origin "$BR"
+          gh pr create --title "Add citation from #${NUM} (unreviewed)" \
+            --body "Automatic intake for #${NUM}. All mechanical checks passed. Nobody has read the paper, so the entry is marked unreviewed.
+
+          To auto-merge these in future rather than opening a pull request, add a repository secret named \`INTAKE_TOKEN\` holding a token with write access." \
+            --base main --head "$BR"
+
+      - name: Tell the contributor it worked
+        if: steps.intake.outputs.accepted == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ steps.issue.outputs.number }}
+        run: |
+          {
+            echo "Thank you. This has been added to the database."
+            echo
+            python3 - <<'PY'
+          import json
+          v=json.load(open('/tmp/verdict.json'))
+          print(f"**{v['title']}**\n")
+          print(f"Added as {'entry' if v['added']==1 else 'entries'} {', '.join(v['ids'])}, marked **unreviewed**.\n")
+          print("Unreviewed means the automatic checks passed: the paper exists, it has not been retracted, it is not already here, and the details were taken from the PubMed record rather than retyped. It does **not** mean anyone has read it yet. A reviewer will read the paper, set the evidence grade, and mark it verified.\n")
+          if v['flag']:
+              print("Two things a reviewer will look at:\n" if len(v['flag'])>1 else "One thing a reviewer will look at:\n")
+              for f in v['flag']: print(f"- {f}")
+              print()
+          print("If anything above looks wrong, say so here and it will be corrected.")
+          PY
+          } > /tmp/comment.md
+          gh issue comment "$NUM" --repo "$GITHUB_REPOSITORY" --body-file /tmp/comment.md
+          gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" \
+            --add-label "accepted" --remove-label "needs review" --remove-label "needs fix" || true
+          if [ "${{ steps.intake.outputs.flagged }}" = "true" ]; then
+            gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" --add-label "needs review" || true
+          fi
+          if [ "${{ steps.tok.outputs.mode }}" = "direct" ]; then
+            gh issue close "$NUM" --repo "$GITHUB_REPOSITORY" --reason completed || true
+          fi
+
+      # ---------------------------------------------------------------- reject
+
+      - name: Explain why it cannot be added yet
+        if: steps.intake.outputs.accepted != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUM: ${{ steps.issue.outputs.number }}
+        run: |
+          {
+            echo "Thank you for this. It cannot be added as it stands, and here is exactly why."
+            echo
+            python3 - <<'PY'
+          import json,os
+          try: v=json.load(open('/tmp/verdict.json'))
+          except Exception: v={'reject':['The submission could not be read. Please check the form was filled in.'],'flag':[]}
+          for r in v.get('reject',[]): print(f"- {r}")
+          print()
+          print("Edit the issue above with the correction and the checks will run again automatically. Nothing else is needed from you.")
+          print()
+          print("If you think a check is wrong, say so in a comment and a person will look.")
+          PY
+          } > /tmp/comment.md
+          gh issue comment "$NUM" --repo "$GITHUB_REPOSITORY" --body-file /tmp/comment.md
+          gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" --add-label "needs fix" || true
