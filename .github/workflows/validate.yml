@@ -2,7 +2,7 @@ name: Validate citations
 
 on:
   pull_request:
-    paths: ["data/**", "scripts/**"]
+    paths: ["data/**", "scripts/**", "docs/browse.md"]
   push:
     branches: [main]
   workflow_dispatch:
@@ -18,3 +18,6 @@ jobs:
       # Checks the schema, the controlled vocabularies, duplicates, and that
       # every PMID actually resolves against the live PubMed record.
       - run: node scripts/validate.mjs data/citations.csv
+      # The reading view is generated from the data. Fail if someone changed
+      # the data and did not rebuild it.
+      - run: node scripts/build-browse.mjs --check

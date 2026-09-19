@@ -28,6 +28,8 @@ body:
     id: kind
     attributes:
       label: What kind of problem is it?
+      description: Pick as many as apply.
+      multiple: true
       options:
         - The number is wrong
         - The source does not say this

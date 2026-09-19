@@ -7,11 +7,13 @@ import { readFileSync } from 'node:fs';
 const OFFLINE = process.argv.includes('--offline');
 const FILE = process.argv.find(a => a.endsWith('.csv')) ?? 'data/citations.csv';
 
+// Order matters for readability: GitHub renders this file as a table, and the
+// columns a reader wants first are leftmost. Long prose sits on the right.
 const COLUMNS = [
-  'id', 'headline_phrase', 'nutrient', 'topic', 'claim', 'population',
-  'study_design', 'n', 'direction', 'evidence_grade', 'medication_interaction',
-  'year', 'journal', 'citation', 'pmid', 'doi', 'url', 'open_access',
-  'source_quality_flag', 'contributor', 'date_added', 'review_status', 'notes',
+  'id', 'headline_phrase', 'nutrient', 'topic', 'direction', 'evidence_grade',
+  'study_design', 'year', 'pmid', 'population', 'n', 'medication_interaction',
+  'claim', 'journal', 'citation', 'doi', 'url', 'open_access',
+  'source_quality_flag', 'review_status', 'contributor', 'date_added', 'notes',
 ];
 
 const REQUIRED = ['id', 'headline_phrase', 'nutrient', 'topic', 'claim', 'study_design', 'direction', 'contributor', 'date_added', 'review_status'];
@@ -19,7 +21,7 @@ const REQUIRED = ['id', 'headline_phrase', 'nutrient', 'topic', 'claim', 'study_
 const VOCAB = {
   nutrient: ['vitamin-d', 'b12', 'folate', 'b1-thiamine', 'b6', 'b3-niacin', 'b2-riboflavin', 'iron', 'magnesium', 'zinc', 'calcium', 'copper', 'vitamin-c', 'vitamin-e', 'potassium', 'iodine', 'omega-3', 'multiple'],
   topic: ['neuropsychiatric', 'pain', 'absorption', 'drug-nutrient', 'prevalence', 'testing'],
-  study_design: ['systematic-review-meta-analysis', 'rct', 'non-randomized-trial', 'prospective-cohort', 'case-control', 'cross-sectional', 'case-series', 'case-report', 'narrative-review', 'guideline', 'survey-data', 'animal', 'in-vitro'],
+  study_design: ['systematic-review-meta-analysis', 'systematic-review', 'rct', 'non-randomized-trial', 'prospective-cohort', 'case-control', 'cross-sectional', 'case-series', 'case-report', 'narrative-review', 'guideline', 'survey-data', 'animal', 'in-vitro'],
   direction: ['supports', 'does-not-support', 'mixed', 'null-result', 'background'],
   evidence_grade: ['', 'strong', 'moderate', 'weak', 'mechanism-only', 'disputed'],
   open_access: ['', 'yes', 'no'],

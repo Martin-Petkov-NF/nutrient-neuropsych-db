@@ -12,7 +12,7 @@ Twenty-three. The first eight are what a contributor supplies. The rest are deri
 |---|---|---|---|
 | `id` | Auto | No | Sequential. Never reused, even after a deletion |
 | `headline_phrase` | Contributor | No | One sentence, in your own words, saying what this paper found. Not the title and not the abstract. Displayed first and displayed bold |
-| `nutrient` | Contributor | Yes | One per row. A paper covering three nutrients becomes three rows |
+| `nutrient` | Contributor | Yes | One per row in the data. On the submission form you may tick several and a reviewer splits them, so you submit once |
 | `topic` | Contributor | Yes | `neuropsychiatric`, `pain`, `absorption`, `drug-nutrient`, `prevalence`, `testing` |
 | `claim` | Contributor | No | What the paper claims, stated flatly. The precise version of the headline phrase |
 | `population` | Contributor | No | Age, sex, country, health status |
@@ -34,7 +34,7 @@ Twenty-three. The first eight are what a contributor supplies. The rest are deri
 | `review_status` | Reviewer | Yes | `unreviewed`, `verified`, `needs-work`, `rejected` |
 | `notes` | Anyone | No | Disagreements go here, not in a comment thread that disappears |
 
-**`study_design`**, strongest first: `systematic-review-meta-analysis`, `rct`, `non-randomized-trial`, `prospective-cohort`, `case-control`, `cross-sectional`, `case-series`, `case-report`, `narrative-review`, `guideline`, `survey-data`, `animal`, `in-vitro`.
+**`study_design`**, strongest first: `systematic-review-meta-analysis`, `systematic-review`, `rct`, `non-randomized-trial`, `prospective-cohort`, `case-control`, `cross-sectional`, `case-series`, `case-report`, `narrative-review`, `guideline`, `survey-data`, `animal`, `in-vitro`.
 
 **`evidence_grade`**, which does the most work:
 
@@ -46,7 +46,7 @@ Twenty-three. The first eight are what a contributor supplies. The rest are deri
 
 ## Three rules that keep it usable
 
-**One paper, one row, per nutrient claim.** A review covering six nutrients becomes six rows sharing a PubMed ID. Sorting by nutrient is the main thing anyone will do, and a row marked "multiple" cannot be sorted.
+**One paper, one row, per nutrient claim.** A review covering six nutrients becomes six rows sharing a PubMed ID. Sorting by nutrient is the main thing anyone will do, and a row marked "multiple" cannot be sorted. This is a rule about the data, not about the form: contributors tick every nutrient that applies and a reviewer creates the rows.
 
 **Negative and null findings are collected on purpose.** The `direction` field exists so a reader can see that a question was asked and answered no. Leaving those out is the commonest way a reference collection becomes useless for deciding anything.
 
@@ -64,8 +64,12 @@ Before marking a row `verified`:
 
 Decline with a reason in the thread. A silent rejection teaches the contributor nothing and they will make the same submission again.
 
+## The reading view is generated
+
+`docs/browse.md` is built from `data/citations.csv` by `scripts/build-browse.mjs`. Never edit it by hand. After changing the data, run the script. CI runs it with `--check` and fails if the two are out of step.
+
 ## What the automatic checks enforce
 
-Schema and column order, required fields, controlled vocabularies, unique ids, no duplicate source and nutrient and topic combination, ISO dates, a PMID or DOI on every row, and a live lookup confirming the PubMed ID resolves to a real paper. A row marked `verified` must also carry an evidence grade and a quality flag.
+Schema and column order, required fields, controlled vocabularies, unique ids, no duplicate source and nutrient and topic combination, ISO dates, a PMID or DOI on every row, and a live lookup confirming the PubMed ID resolves to a real paper. A row marked `verified` must also carry an evidence grade and a quality flag. Separately, CI confirms the generated reading view matches the data.
 
 The checks catch format and fabrication. They cannot tell whether a paper says what a row claims it says. That is what review is for.

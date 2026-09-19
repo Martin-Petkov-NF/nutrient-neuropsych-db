@@ -18,9 +18,11 @@ It covers vitamin B12, folate, vitamin D, iron, thiamine, vitamin B6, niacin, ma
 
 Every prevalence figure states the blood test it came from and the cutoff used, because those two things change the answer more than the population does.
 
-### 🔎 [Browse the citation database](data/citations.csv)
+### 🔎 [Browse the citations](docs/browse.md)
 
-The citations themselves. That link opens a **searchable, sortable table** in your browser, no download needed. Each row carries a one-sentence plain-English summary of what the paper found, written by whoever added it.
+The citations themselves, grouped by nutrient, with a plain-English sentence on each saying what the paper found. This view wraps to fit a screen, so it reads on a phone.
+
+To sort, filter or search instead, open [the data file](data/citations.csv). GitHub shows it as a sortable table with a search box. It is wide, because it carries every field.
 
 ### ✍️ [Add a citation, or tell us something is wrong](../../issues/new/choose)
 
@@ -62,6 +64,7 @@ The table did not appear from nowhere. These are the working papers behind it, a
 | **[Medications and absorption](docs/drugs-and-absorption.md)** | Which drugs really affect nutrient levels, and which are folklore. Covers acid blockers, metformin, antibiotics, GLP-1 drugs, diuretics, low stomach acid, and whether vitamin patches work |
 | **[Methods](docs/methods.md)** | The standard of proof everything above was held to, written before the research rather than after it |
 | **[References](docs/references.md)** | Every source cited anywhere here, with a link to each record |
+| **[Browse](docs/browse.md)** | The citation entries as a readable list, grouped by nutrient. Generated from the data, so it is never out of step with it |
 
 ### Three findings, to show what this is for
 
@@ -113,7 +116,13 @@ Everything below this line is for whoever is running the repository. Contributor
 node scripts/validate.mjs data/citations.csv
 ```
 
-Add `--offline` to skip the PubMed lookups. Needs Node 20 or newer. No dependencies to install.
+```bash
+node scripts/build-browse.mjs
+```
+
+Add `--offline` to the first one to skip the PubMed lookups. Needs Node 20 or newer, no dependencies to install.
+
+The second regenerates the reading view from the data. Run it after any change to the data, or CI will fail with `--check`. Never edit `docs/browse.md` by hand.
 
 The same script runs automatically on every proposed change, and it rejects an entry that has no identifier, uses a value outside the allowed list, duplicates an existing source, or carries a PubMed ID that does not resolve against the live record.
 
