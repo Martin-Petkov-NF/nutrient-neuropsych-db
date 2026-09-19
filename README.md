@@ -25,6 +25,19 @@ If you are comfortable with git, edit `data/citations.csv` and open a pull reque
 
 Nothing is accepted silently and nothing is rejected silently.
 
+## The evidence behind the seed data
+
+The database ships with the review that produced it. These are not background reading, they are the working papers, and every citation in them was checked against the PubMed record.
+
+| Document | What it is |
+|---|---|
+| [docs/nutrient-table.md](docs/nutrient-table.md) | The main review. Per nutrient: subclinical and clinical prevalence with biomarker and cutoff, symptoms at each level, tests, risk factors, and an evidence grade per claim. Also the nutrients considered and excluded, with reasons |
+| [docs/corrections.md](docs/corrections.md) | Thirteen widely circulated figures traced to their sources. Most do not survive. This is the most useful document here |
+| [docs/drugs-and-absorption.md](docs/drugs-and-absorption.md) | Medications and nutrient status, separating three claims that usually get merged: the drug moves a biomarker, the drug causes deficiency, the deficiency causes symptoms |
+| [docs/methods.md](docs/methods.md) | The evidence bar all of the above is built to, written before the research rather than after |
+
+Three findings give the flavor. Frank folate deficiency has been under 1% of the US population since fortification, and the often-quoted 20% is insufficiency in women of childbearing age against a neural tube defect threshold. The widely cited list of "most common subclinical deficiencies" traces to a single paper authored from a supplement industry trade association, and it measures dietary intake rather than deficiency. The vitamin D figure everyone quotes was measured on a laboratory method the national survey abandoned in 2006.
+
 ## The evidence bar
 
 Peer-reviewed journals, federal surveys, and government health agencies. Not accepted: video platforms, supplement sellers, commercial laboratories that sell the test in question, and pop-health sites. Reference sites such as the Linus Pauling Institute may be used to locate a primary source but are never cited as the source.
