@@ -176,7 +176,7 @@ The nearest is 24.7%, which uses transferrin saturation rather than ferritin, an
 
 **Why it matters, and this one cuts in the claim's favor.** The conventional 15 µg/L threshold is expert opinion rather than physiology, and the World Health Organization has said it lacked the data to revise it. Federal researchers derived a threshold of about 25 µg/L from the point where hemoglobin and soluble transferrin receptor actually begin to move, and replicated it ([PMID 34329578](https://pubmed.ncbi.nlm.nih.gov/34329578/)). So the circulating figure is unsourced and probably too low rather than too high, which is the opposite of the pattern in every other entry here.
 
-One finding from the same literature deserves to travel with it: **among those with iron deficiency, 83.6% did not have anemia** ([PMID 37367984](https://pubmed.ncbi.nlm.nih.gov/37367984/))**.** A hemoglobin-based screen misses five in six.
+One finding from the same literature deserves to travel with it: **among those with iron deficiency, 83.6% did not have anemia** ([PMID 37367984](https://pubmed.ncbi.nlm.nih.gov/37367984/)). A hemoglobin-based screen misses five in six.
 
 **Status.** All citations verified against PubMed, 19 September 2026.
 
@@ -252,7 +252,7 @@ Both are assessed in full in [drugs-and-absorption.md](drugs-and-absorption.md).
 
 **Transdermal vitamin D, B complex and magnesium for people with impaired digestion.** Not supported. The two human comparative studies both found patches inferior to oral supplements. Magnesium has one small pilot whose result was null. Vitamin D has a single unreplicated trial with no human replication among the papers citing it. The regulatory position closes it: a dietary supplement is by definition intended for ingestion, so a topical product cannot be one, and a transdermal system delivering a substance systemically is a drug requiring approval. No vitamin or mineral has been through that pathway.
 
-**Dairy, tea, coffee and calcium blocking iron absorption.** True over one meal, and the effect is large. Not shown to matter over time, which is the question that counts. **Six months of daily calcium supplementation produced no change in hemoglobin, hematocrit or ferritin in iron-replete adults** ([PMID 9665102](https://pubmed.ncbi.nlm.nih.gov/9665102/))**.** The advice that survives is narrow: someone treating diagnosed iron deficiency should take the supplement away from calcium, tea and coffee.
+**Dairy, tea, coffee and calcium blocking iron absorption.** True over one meal, and the effect is large. Not shown to matter over time, which is the question that counts. **Six months of daily calcium supplementation produced no change in hemoglobin, hematocrit or ferritin in iron-replete adults** ([PMID 9665102](https://pubmed.ncbi.nlm.nih.gov/9665102/)). The advice that survives is narrow: someone treating diagnosed iron deficiency should take the supplement away from calcium, tea and coffee.
 
 This gap between single-meal absorption studies and long-term status studies is the most useful methodological point in the wider brief's whole topic list, and it generalizes across it.
 - Up to 24% of reproductive-age women with subclinical iron deficiency.

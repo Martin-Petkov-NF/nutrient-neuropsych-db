@@ -192,7 +192,7 @@ Randomized evidence is null, at scale. In 18,353 adults over a median 5.3 years,
 | Ferritin below 50 µg/L, females 12 to 21 | 77.5% | Weyand 2023, [PMID 37367984](https://pubmed.ncbi.nlm.nih.gov/37367984/) |
 | Pregnancy | 47.0% by ferritin | Williams 2025, [PMID 40324523](https://pubmed.ncbi.nlm.nih.gov/40324523/) |
 
-**The single most useful fact in this row: among those with iron deficiency, 83.6% did not have anemia** (Weyand 2023, [PMID 37367984](https://pubmed.ncbi.nlm.nih.gov/37367984/))**.** Screening on hemoglobin misses five in six.
+**The single most useful fact in this row: among those with iron deficiency, 83.6% did not have anemia** (Weyand 2023, [PMID 37367984](https://pubmed.ncbi.nlm.nih.gov/37367984/)). Screening on hemoglobin misses five in six.
 
 **The conventional threshold is expert opinion, and a better one exists.** The World Health Organization's 15 µg/L was not derived from physiology, and the organization has said it lacked data to revise it. Federal researchers derived thresholds from the points where hemoglobin and soluble transferrin receptor actually start to move: **about 25 µg/L** in nonpregnant women, replicated in a second survey (Mei 2021, [PMID 34329578](https://pubmed.ncbi.nlm.nih.gov/34329578/)). At that threshold prevalence roughly doubles.
 
@@ -412,7 +412,7 @@ Serum calcium is a test for a parathyroid, kidney or vitamin D problem. It is no
 
 ### Copper: excluded as a row, kept as a footnote to zinc
 
-Across 75 patients in three case series, **the presenting complaint was gait, in every case** ([PMID 15249607](https://pubmed.ncbi.nlm.nih.gov/15249607/))**.** The syndrome is dorsal column sensory ataxia with spasticity and neuropathy, plus anemia and low white cells. No mood, psychotic or primary cognitive feature appears in the series. There is no prevalence figure to put in a cell, and where frank deficiency occurs in adults it is surgical or iatrogenic.
+Across 75 patients in three case series, **the presenting complaint was gait, in every case** ([PMID 15249607](https://pubmed.ncbi.nlm.nih.gov/15249607/)). The syndrome is dorsal column sensory ataxia with spasticity and neuropathy, plus anemia and low white cells. No mood, psychotic or primary cognitive feature appears in the series. There is no prevalence figure to put in a cell, and where frank deficiency occurs in adults it is surgical or iatrogenic.
 
 It also invites a specific confusion. Most literature linking copper to psychiatric symptoms concerns copper **excess** in Wilson disease, where psychiatric presentation is common and misdiagnosis as schizophrenia is documented.
 
