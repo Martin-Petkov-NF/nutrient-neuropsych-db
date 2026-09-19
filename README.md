@@ -148,7 +148,9 @@ Test it against a saved issue body:
 node scripts/intake.mjs --body-file issue.md --dry-run
 ```
 
-**To switch intake from opening a pull request to committing directly**, add a repository secret named `INTAKE_TOKEN` holding a personal access token with `repo` scope, belonging to an account with admin on this repository. The workflow detects it and changes mode on its own.
+**To switch intake from opening a pull request to committing directly**, add a repository secret named `INTAKE_TOKEN` holding a personal access token with `repo` scope, belonging to an account with admin on this repository. The workflow detects it and changes mode on its own. Nothing else needs changing.
+
+Settings, Secrets and variables, Actions, New repository secret. Name it `INTAKE_TOKEN`.
 
 Without that secret the workflow still runs every check and opens a ready-to-merge pull request instead, which is one click. GitHub does not allow the Actions bot to bypass branch protection on a personal repository, only in an organization, so a token is the only route to a genuine auto-merge here.
 
