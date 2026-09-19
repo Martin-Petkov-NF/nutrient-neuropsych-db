@@ -35,8 +35,9 @@ The database ships with the review that produced it. These are not background re
 | [docs/corrections.md](docs/corrections.md) | Thirteen widely circulated figures traced to their sources. Most do not survive. This is the most useful document here |
 | [docs/drugs-and-absorption.md](docs/drugs-and-absorption.md) | Medications and nutrient status, separating three claims that usually get merged: the drug moves a biomarker, the drug causes deficiency, the deficiency causes symptoms |
 | [docs/methods.md](docs/methods.md) | The evidence bar all of the above is built to, written before the research rather than after |
+| [docs/references.md](docs/references.md) | Every source cited across the four documents, 108 of them, each identifier verified against the PubMed record |
 
-Three findings give the flavor. Frank folate deficiency has been under 1% of the US population since fortification, and the often-quoted 20% is insufficiency in women of childbearing age against a neural tube defect threshold. The widely cited list of "most common subclinical deficiencies" traces to a single paper authored from a supplement industry trade association, and it measures dietary intake rather than deficiency. The vitamin D figure everyone quotes was measured on a laboratory method the national survey abandoned in 2006.
+Every PubMed identifier in these documents links to the record, and all 108 were checked to resolve. Three findings give the flavor. Frank folate deficiency has been under 1% of the US population since fortification, and the often-quoted 20% is insufficiency in women of childbearing age against a neural tube defect threshold. The widely cited list of "most common subclinical deficiencies" traces to a single paper authored from a supplement industry trade association, and it measures dietary intake rather than deficiency. The vitamin D figure everyone quotes was measured on a laboratory method the national survey abandoned in 2006.
 
 ## The evidence bar
 

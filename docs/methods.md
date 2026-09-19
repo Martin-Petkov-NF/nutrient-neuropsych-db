@@ -43,7 +43,7 @@ Two of its rules have no equivalent in general content standards, so they are ad
 
 Named here so that every prevalence figure in the table can be traced to one of them, and so that anything sourced elsewhere is visibly an exception needing a reason.
 
-**Biochemical deficiency prevalence.** The CDC National Report on Biochemical Indicators of Diet and Nutrition. The 2026 edition was released on 24 June 2026 and covers NHANES biomarker data from 1999 through August 2023, across 131 indicators, stratified by dietary supplement use for the first time. It reports by age, sex, and race and Hispanic origin, which is what the brief asked for. Almost every figure circulating in the material behind this request predates it, several by more than a decade.
+**Biochemical deficiency prevalence.** The [CDC National Report on Biochemical Indicators of Diet and Nutrition](https://www.cdc.gov/nutrition-report/index.html). The 2026 edition was released on 24 June 2026 and covers NHANES biomarker data from 1999 through August 2023, across 131 indicators, stratified by dietary supplement use for the first time. It reports by age, sex, and race and Hispanic origin, which is what the brief asked for. Almost every figure circulating in the material behind this request predates it, several by more than a decade.
 
 **Dietary intake, where intake is genuinely the point.** NHANES intake data directly, or a peer-reviewed analysis of it. Never through a secondary summary, for the reason set out in the third correction.
 
