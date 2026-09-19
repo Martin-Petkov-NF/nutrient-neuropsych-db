@@ -1,0 +1,135 @@
+name: Add a citation
+description: Suggest a paper for the database. No GitHub or coding knowledge needed.
+title: "[citation] "
+labels: ["new citation", "needs review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill this in and submit. A reviewer will check the paper and add it to the database.
+        You do not need to know anything about GitHub to use this form.
+
+        One paper per form. If a paper covers three nutrients, submit it three times, once per nutrient.
+
+  - type: input
+    id: pmid
+    attributes:
+      label: PMID or DOI
+      description: The PubMed ID (a number) or the DOI (starts with 10.). This is the single most important field. Without it nobody can check the paper.
+      placeholder: "31504109"
+    validations:
+      required: true
+
+  - type: textarea
+    id: headline
+    attributes:
+      label: Headline phrase
+      description: One sentence, in your own words, saying what this paper found. Not the title, not the abstract. This is what readers see first.
+      placeholder: "Frank folate deficiency has been under 1% of the US population since fortification."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: nutrient
+    attributes:
+      label: Nutrient
+      options:
+        - vitamin-d
+        - b12
+        - folate
+        - b1-thiamine
+        - b6
+        - b3-niacin
+        - b2-riboflavin
+        - iron
+        - magnesium
+        - zinc
+        - calcium
+        - copper
+        - vitamin-c
+        - vitamin-e
+        - potassium
+        - iodine
+        - omega-3
+        - multiple
+    validations:
+      required: true
+
+  - type: dropdown
+    id: topic
+    attributes:
+      label: Topic
+      options:
+        - neuropsychiatric
+        - pain
+        - absorption
+        - drug-nutrient
+        - prevalence
+        - testing
+    validations:
+      required: true
+
+  - type: dropdown
+    id: study_design
+    attributes:
+      label: Study design
+      description: If you are unsure, pick the closest and say so in the notes. A reviewer will correct it.
+      options:
+        - systematic-review-meta-analysis
+        - rct
+        - non-randomized-trial
+        - prospective-cohort
+        - case-control
+        - cross-sectional
+        - case-series
+        - case-report
+        - narrative-review
+        - guideline
+        - survey-data
+        - animal
+        - in-vitro
+    validations:
+      required: true
+
+  - type: dropdown
+    id: direction
+    attributes:
+      label: What does this paper do to the claim?
+      description: Papers that find nothing are wanted just as much as papers that find something. A collection of only supportive papers is not usable for deciding anything.
+      options:
+        - supports
+        - does-not-support
+        - mixed
+        - null-result
+        - background
+    validations:
+      required: true
+
+  - type: input
+    id: population
+    attributes:
+      label: Who was studied
+      description: Age, sex, country, health status. "US adults 60 and over" is better than "older people".
+      placeholder: "US women aged 12 to 49, NHANES 2011 to 2016"
+
+  - type: input
+    id: medication
+    attributes:
+      label: Medication involved, if any
+      placeholder: "proton pump inhibitors"
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything a reviewer should know
+      description: Doubts, conflicts of interest you noticed, funding sources, or why you think this matters.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: This is a primary source or a systematic review, not a blog post, video, supplement seller or news article.
+          required: true
+        - label: I have read at least the abstract, and the headline phrase reflects what the paper actually says.
+          required: true

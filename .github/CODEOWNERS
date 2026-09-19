@@ -1,0 +1,6 @@
+# Uncomment and replace the handle once a reviewer is named, then turn on a
+# branch protection rule on main requiring one approving review.
+# Without both of these the approval step is decorative.
+#
+# data/       @reviewer-github-handle
+# scripts/    @reviewer-github-handle

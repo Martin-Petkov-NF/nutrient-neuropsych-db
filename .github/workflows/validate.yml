@@ -1,0 +1,20 @@
+name: Validate citations
+
+on:
+  pull_request:
+    paths: ["data/**", "scripts/**"]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      # Checks the schema, the controlled vocabularies, duplicates, and that
+      # every PMID actually resolves against the live PubMed record.
+      - run: node scripts/validate.mjs data/citations.csv
