@@ -17,6 +17,12 @@ on:
         description: Issue number to reprocess
         required: true
 
+# An issue opened by a form arrives as both "opened" and "labeled", which would
+# otherwise run this twice against the same submission.
+concurrency:
+  group: intake-${{ github.event.issue.number || inputs.issue }}
+  cancel-in-progress: true
+
 permissions:
   contents: write
   issues: write

@@ -16,7 +16,10 @@ const COLUMNS = [
   'source_quality_flag', 'review_status', 'contributor', 'date_added', 'notes',
 ];
 
-const REQUIRED = ['id', 'headline_phrase', 'nutrient', 'topic', 'claim', 'study_design', 'direction', 'contributor', 'date_added', 'review_status'];
+// Required on every row. `claim` and `evidence_grade` are reviewer-enriched and
+// are required only once a row is marked verified, see below, because an
+// automatically accepted row lands before anyone has read the paper.
+const REQUIRED = ['id', 'headline_phrase', 'nutrient', 'topic', 'study_design', 'direction', 'contributor', 'date_added', 'review_status'];
 
 const VOCAB = {
   nutrient: ['vitamin-d', 'b12', 'folate', 'b1-thiamine', 'b6', 'b3-niacin', 'b2-riboflavin', 'iron', 'magnesium', 'zinc', 'calcium', 'copper', 'vitamin-c', 'vitamin-e', 'potassium', 'iodine', 'omega-3', 'multiple'],
@@ -104,8 +107,10 @@ for (const [idx, cells] of rows.entries()) {
   seenClaims.add(key);
 
   // A verified row needs a grade and a quality flag; an unreviewed one must not claim either.
-  if (r.review_status === 'verified' && (!r.evidence_grade || !r.source_quality_flag)) {
-    errors.push(at('is marked verified but has no evidence_grade or no source_quality_flag'));
+  if (r.review_status === 'verified') {
+    for (const f of ['evidence_grade', 'source_quality_flag', 'claim']) {
+      if (!r[f]) errors.push(at(`is marked verified but has no ${f}. A verified row means a person read the paper.`));
+    }
   }
   if (r.headline_phrase.length > 300) warnings.push(at('headline_phrase is over 300 characters; it is meant to be one readable sentence'));
 }
