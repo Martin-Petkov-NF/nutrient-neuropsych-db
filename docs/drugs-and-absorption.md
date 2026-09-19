@@ -172,15 +172,31 @@ Diuretic-associated Wernicke encephalopathy is asserted rather than demonstrated
 
 Topical vitamin D, B complex and magnesium are promoted for people with impaired digestion or no stomach acid. This is the clearest negative here and it deserves a careful answer rather than a dismissal, because the people most drawn to it include pharmacists who will check the sources.
 
-**The two human comparative studies both found patches inferior to oral.** In patients after gastric bypass, 82% of the patch group had at least one deficiency against 41% of the oral group. In runners, oral iron beat patches on ferritin.
+**Where a patch has been compared against swallowing, the patch lost.**
 
-**Magnesium** has one small pilot study whose whole-group result was null.
+After gastric bypass, 82% of patch users had at least one deficiency at one year against 41% of pill users, with significantly lower vitamin D, B1 and B12 ([PMID 31302845](https://pubmed.ncbi.nlm.nih.gov/31302845/)). Note the design honestly: this is a retrospective chart review of 44 self-selected patients at one hospital, not a randomized trial.
 
-**Vitamin D** has a single unreplicated trial from one group, and none of the papers citing it is a human replication.
+In endurance runners with low ferritin, an 8-week parallel-group comparison found oral iron raised ferritin while the patch did not, with a 15.3 µg/L gap at week 6 ([PMID 32217791](https://pubmed.ncbi.nlm.nih.gov/32217791/)). The patch was better tolerated, with no gastrointestinal complaints against 6 on the pill. It was also inactive.
 
-**The regulatory position closes it.** A dietary supplement is by definition intended for ingestion, so a topical product cannot legally be one. A transdermal system delivering a substance systemically is a drug and requires a new drug application. No vitamin or mineral has been through that pathway.
+**The strongest single study is a real randomized trial and it is largely null.** 444 infants randomized to liposomal iron, vitamin D, folate and B12 in massage oil against placebo oil, to 12 months ([PMID 34493339](https://pubmed.ncbi.nlm.nih.gov/34493339/)). No hemoglobin benefit. Vitamin D moved by 1.46 ng/mL, which the authors themselves call marginal. No difference in development.
 
-The honest framing for the course: if transdermal delivery of these nutrients worked, there would be pharmacokinetic studies showing blood levels rising, and there would be an approved product. Neither exists.
+**Magnesium has two human studies that measured magnesium, and both are null.** A randomized pilot of magnesium cream for 2 weeks found no change in serum or urinary magnesium, p = 0.29 and p = 0.48 ([PMID 28403154](https://pubmed.ncbi.nlm.nih.gov/28403154/)). An open-label study of magnesium spray over 12 weeks reported that serum magnesium did not change significantly ([PMID 37486715](https://pubmed.ncbi.nlm.nih.gov/37486715/)). A review of the field concludes that the promotion of transdermal magnesium is scientifically unsupported ([PMID 28788060](https://pubmed.ncbi.nlm.nih.gov/28788060/)).
+
+Two traps here. The cream pilot reached significance only in a post hoc subgroup of non-athletes, and that subgroup p-value is the one sellers quote rather than the prespecified whole-group result. And a frequently cited fibromyalgia study reporting symptom improvement on magnesium spray was single-arm, unblinded, and **measured no magnesium at all** ([PMID 26343101](https://pubmed.ncbi.nlm.nih.gov/26343101/)).
+
+**Vitamin D is the one place with positive human data, and it does not carry the weight put on it.** Two randomized trials report large rises in blood levels ([PMID 24711745](https://pubmed.ncbi.nlm.nih.gov/24711745/), [PMID 30144887](https://pubmed.ncbi.nlm.nih.gov/30144887/)). Both come from the same institution, with overlapping authors, testing the same proprietary product whose developing institution holds the patent. No independent group has replicated it. An independent placebo-controlled trial has completed and has not yet reported, so this may change.
+
+**Transdermal B12 and B complex in humans: no studies found.** Searches return rabbit, mouse and laboratory-membrane work only. For a route being actively recommended to people with absorption problems, the absence of any human pharmacokinetic study is itself the finding.
+
+**One study is cited in the other direction and is worth pre-empting**, because anyone checking will meet it. A pilot reported only 19% of patch-using bariatric patients with two or more deficiencies at one year ([PMID 35859973](https://pubmed.ncbi.nlm.nih.gov/35859973/)). It cannot answer the comparative question: there was no comparison group, the authors say so, and only 25 of the participants had a complete laboratory panel at one year.
+
+**The regulatory position, stated precisely.** A dietary supplement is defined in statute as a product intended for ingestion, at 21 U.S.C. 321(ff)(2) and 350(c)(1)(B), so a topical product cannot lawfully be one. The Food and Drug Administration's consumer guidance puts it plainly: supplements must be swallowed, so topical or inhaled products are not supplements. Separately, a new route of administration makes a known substance a new drug under 21 CFR 310.3(h)(5), and a new drug needs approval under 21 U.S.C. 355(a).
+
+Be accurate about enforcement. **No warning letter names a vitamin patch.** The agency has written to sellers of a transdermal B12 cream and of a worn controlled-release band, both of which carried Supplement Facts panels, telling them that products intended to enter the body through the skin are not intended for ingestion and so are not dietary supplements.
+
+**The honest framing.** If transdermal delivery of these nutrients worked, there would be pharmacokinetic studies showing blood levels rising across independent groups, and there would be an approved product. For magnesium the studies exist and are negative. For B12 they do not exist. For vitamin D they exist, are positive, and come from one group testing one product.
+
+A final note that matters clinically rather than academically. Wernicke encephalopathy has been reported in a patient relying on an over-the-counter multivitamin patch after bariatric surgery ([PMID 39896946](https://pubmed.ncbi.nlm.nih.gov/39896946/)). One case is one case. It is the right order of magnitude of concern for someone substituting a patch for a supplement they actually need.
 
 ## Dairy, tea, coffee and calcium against iron
 

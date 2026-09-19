@@ -1,0 +1,9 @@
+# Blank issues are turned off on purpose. "Blank issue" told a first-time
+# visitor nothing about what it was for, and sat next to a form that did.
+# The three named forms cover everything, and "Ask a question" is the
+# catch-all that a blank issue used to be, with a label people understand.
+blank_issues_enabled: false
+contact_links:
+  - name: Browse the database first
+    url: https://github.com/Martin-Petkov-NF/nutrient-neuropsych-db/blob/main/data/citations.csv
+    about: The citations, shown as a searchable table. Worth a look before adding one.

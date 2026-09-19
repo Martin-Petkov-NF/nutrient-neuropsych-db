@@ -1,84 +1,138 @@
-# Nutrients and neuropsychiatric symptoms: an open citation database
+# Nutrients and neuropsychiatric symptoms
 
-A collection of primary literature on how nutrient status affects neuropsychiatric symptoms and pain, and on how medications affect nutrient status. Anyone may contribute. Every entry is checked before it is accepted.
+An open, checked collection of the research on how nutrient deficiencies affect mood, memory, cognition and pain, and on how medications affect nutrient levels.
 
-## What makes this different from a reading list
+Two things live here. A **reference table** for clinicians, and a **citation database** that anyone can add to. Everything is traceable to a source, and every source has been checked to exist and to say what we claim it says.
 
-**Every row carries an identifier that lets a second person check it.** A row with no PubMed ID and no DOI cannot be merged. This is enforced automatically, not by a person remembering.
+You do not need to know anything about GitHub to use this or to contribute.
 
-**Findings that go the other way are collected on purpose.** Each row records whether the paper supports a claim, fails to support it, is mixed, or is a null result. A collection containing only supportive papers cannot be used to decide anything.
+---
 
-**Intake and deficiency are never conflated.** A population falling below a recommended intake is not a population with a measured deficiency. Most of the confusion in this subject comes from treating the two as one thing, so the schema keeps them apart.
+## Start here
 
-## How to contribute, with no GitHub knowledge
+### 📋 [The reference table](docs/nutrient-table.md)
 
-Open a **[new issue using the "Add a citation" form](../../issues/new/choose)**. It is a web form with dropdowns. You do not need to install anything, learn git, or use a command line. A reviewer takes it from there.
+**This is the main thing.** For each nutrient that can produce neuropsychiatric symptoms, it sets out how common the deficiency actually is, what symptoms are attributed to it, which tests detect it, what raises the risk, and how good the evidence is for each of those claims.
 
-If you are comfortable with git, edit `data/citations.csv` and open a pull request. The checks below run automatically.
+It covers vitamin B12, folate, vitamin D, iron, thiamine, vitamin B6, niacin, magnesium, zinc and omega-3. It also says which nutrients were considered and left out, and why, because a well-sourced exclusion saves as much time as an inclusion.
 
-## What happens to a submission
+Every prevalence figure states the blood test it came from and the cutoff used, because those two things change the answer more than the population does.
 
-1. You submit the form.
-2. Automatic checks run: the schema, the controlled vocabularies, duplicates, and whether the PubMed ID actually resolves to a real paper.
-3. A reviewer reads the source and either accepts it, asks a question, or declines it with a reason.
-4. Accepted rows are marked `verified` and given an evidence grade.
+### 🔎 [Browse the citation database](data/citations.csv)
 
-Nothing is accepted silently and nothing is rejected silently.
+The citations themselves. That link opens a **searchable, sortable table** in your browser, no download needed. Each row carries a one-sentence plain-English summary of what the paper found, written by whoever added it.
 
-## The evidence behind the seed data
+### ✍️ [Add a citation, or tell us something is wrong](../../issues/new/choose)
 
-The database ships with the review that produced it. These are not background reading, they are the working papers, and every citation in them was checked against the PubMed record.
+A web form with dropdowns. Nothing to install, no coding, no command line. Pick the form that fits and someone takes it from there.
 
-| Document | What it is |
+---
+
+## How to contribute
+
+Three forms, and you cannot pick the wrong one.
+
+| Form | Use it when |
 |---|---|
-| [docs/nutrient-table.md](docs/nutrient-table.md) | The main review. Per nutrient: subclinical and clinical prevalence with biomarker and cutoff, symptoms at each level, tests, risk factors, and an evidence grade per claim. Also the nutrients considered and excluded, with reasons |
-| [docs/corrections.md](docs/corrections.md) | Thirteen widely circulated figures traced to their sources. Most do not survive. This is the most useful document here |
-| [docs/drugs-and-absorption.md](docs/drugs-and-absorption.md) | Medications and nutrient status, separating three claims that usually get merged: the drug moves a biomarker, the drug causes deficiency, the deficiency causes symptoms |
-| [docs/methods.md](docs/methods.md) | The evidence bar all of the above is built to, written before the research rather than after |
-| [docs/references.md](docs/references.md) | Every source cited across the four documents, 108 of them, each identifier verified against the PubMed record |
+| **[Add a citation](../../issues/new?template=add-citation.yml)** | You have found a paper that belongs here |
+| **[Suggest a correction](../../issues/new?template=suggest-a-correction.yml)** | Something already here looks wrong, out of date, or overstated |
+| **[Ask a question](../../issues/new?template=ask-a-question.yml)** | Anything else, including "which form do I want?" |
 
-Every PubMed identifier in these documents links to the record, and all 108 were checked to resolve. Three findings give the flavor. Frank folate deficiency has been under 1% of the US population since fortification, and the often-quoted 20% is insufficiency in women of childbearing age against a neural tube defect threshold. The widely cited list of "most common subclinical deficiencies" traces to a single paper authored from a supplement industry trade association, and it measures dietary intake rather than deficiency. The vitamin D figure everyone quotes was measured on a laboratory method the national survey abandoned in 2006.
+**Corrections are the most valuable thing you can send.** Most of what is here exists because someone traced a widely repeated figure back to its source and found it did not say what everyone thought. If you think we have done the same thing, please say so. You do not need to be certain.
 
-## The evidence bar
+### What happens after you submit
 
-Peer-reviewed journals, federal surveys, and government health agencies. Not accepted: video platforms, supplement sellers, commercial laboratories that sell the test in question, and pop-health sites. Reference sites such as the Linus Pauling Institute may be used to locate a primary source but are never cited as the source.
+1. You fill in the form. That is your whole job.
+2. Automatic checks run within a minute. They confirm the paper's identifier is real and resolves to an actual record, that the entry is not a duplicate, and that the fields are filled in properly.
+3. A reviewer reads the source and either accepts it, asks you a question, or declines it with a reason.
+4. Accepted entries are marked verified and given an evidence grade.
 
-Where a paper's funder or author has a commercial interest in the result, the row says so in `source_quality_flag`. That is not a reason to exclude it. It is a reason to label it.
+Nothing is accepted silently and nothing is rejected silently. If we decline something you sent, you will be told why.
 
-## Running the checks yourself
+---
+
+## The documents
+
+The table did not appear from nowhere. These are the working papers behind it, and every citation in them links to the record it came from.
+
+| Document | What it is, and why you might open it |
+|---|---|
+| **[The reference table](docs/nutrient-table.md)** | The main review, nutrient by nutrient. Start here if you want the answer to "does this deficiency cause psychiatric symptoms, and how would I know?" |
+| **[Corrections](docs/corrections.md)** | Thirteen widely circulated figures traced back to their sources. Most do not survive. **If you read only one thing here, read this one.** |
+| **[Medications and absorption](docs/drugs-and-absorption.md)** | Which drugs really affect nutrient levels, and which are folklore. Covers acid blockers, metformin, antibiotics, GLP-1 drugs, diuretics, low stomach acid, and whether vitamin patches work |
+| **[Methods](docs/methods.md)** | The standard of proof everything above was held to, written before the research rather than after it |
+| **[References](docs/references.md)** | Every source cited anywhere here, with a link to each record |
+
+### Three findings, to show what this is for
+
+**The folate figure is wrong in a way that matters.** The often-quoted "20% of US adults" is women aged 12 to 49, measured against a threshold for birth-defect risk that has no established connection to mental health. Actual folate deficiency has been under 1% of the population since fortification.
+
+**The standard list of "most common deficiencies" traces to the supplement industry.** The magnesium, vitamin E, zinc and copper figures all come from one paper whose lead author's printed affiliation is the industry's trade association, and it measures what people eat rather than what is in their blood.
+
+**The vitamin D figure everyone quotes is a laboratory artifact.** The familiar 41.6% was measured using a method the national survey abandoned in 2006. On current methods it is about 22%.
+
+---
+
+## Three rules that make this different from a reading list
+
+**Every entry can be checked by someone else.** An entry with no PubMed ID and no DOI cannot be added. This is enforced automatically rather than by anyone remembering.
+
+**Studies that found nothing are collected on purpose.** Each entry records whether the paper supports a claim, fails to support it, is mixed, or found no effect. A collection containing only supportive papers cannot be used to decide anything.
+
+**How much people eat and what is in their blood are never treated as the same thing.** A population eating less than a recommended amount is not a population with a measured deficiency. Most of the confusion in this whole subject comes from merging those two ideas, so the database keeps them in separate fields.
+
+## What counts as a source
+
+Peer-reviewed journals, national health surveys, and government health agencies.
+
+Not accepted: video platforms, supplement sellers, laboratories that sell the test being discussed, and general wellness sites. Summary sites can be used to find a primary paper but are never cited as the source.
+
+Where a study's funder or author has a commercial interest in the result, the entry says so. That is not a reason to exclude it. It is a reason to label it.
+
+## This is not medical advice
+
+It is a bibliography. It reports what published research says. It does not tell anyone what to take, what to test for, or what to do about a result. See [DISCLAIMER.md](DISCLAIMER.md).
+
+## Using this elsewhere
+
+The data is released under [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/). You may reproduce it, adapt it and build on it, including in a course or a published guide, as long as you credit it. You do not need to ask.
+
+Two requests that the license does not require. Keep the evidence-grade column if you reproduce entries, because it carries the honesty and it is the first thing that gets cut for space. And if you change any content, describe it as adapted rather than reproduced.
+
+The validation script is MIT licensed.
+
+---
+
+## For maintainers
+
+Everything below this line is for whoever is running the repository. Contributors can stop reading here.
+
+### Running the checks locally
 
 ```bash
 node scripts/validate.mjs data/citations.csv
 ```
 
-Add `--offline` to skip the PubMed lookups. Node 20 or newer, no dependencies to install.
+Add `--offline` to skip the PubMed lookups. Needs Node 20 or newer. No dependencies to install.
 
-## The schema
+The same script runs automatically on every proposed change, and it rejects an entry that has no identifier, uses a value outside the allowed list, duplicates an existing source, or carries a PubMed ID that does not resolve against the live record.
 
-Twenty-three fields, documented in the contributing guide. The three that do the most work:
+### The fields
 
-- `headline_phrase`: one sentence in the contributor's own words, saying what the paper found. This is what a reader sees first.
-- `direction`: whether the paper supports, does not support, or is neutral on the claim.
-- `evidence_grade`: set by a reviewer, not by the contributor.
+Twenty-three, documented in [CONTRIBUTING.md](CONTRIBUTING.md). The three that do the most work:
 
-## License
+- `headline_phrase`, one sentence in the contributor's own words saying what the paper found. It is the first thing a reader sees.
+- `direction`, whether the paper supports, does not support, or is neutral on the claim.
+- `evidence_grade`, set by a reviewer rather than by the contributor.
 
-Data is released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Use it, redistribute it, build on it, with attribution. The validation script is MIT.
+### Review settings
 
-## Status
+`main` is protected. Changes need a proposed change with one approving review from the code owner, and the automatic check has to pass. Force pushes and deletions are blocked.
 
-Newly created and seeded with three checked references. It is a working template
-with real data in it, not a finished collection.
+Administrators are currently exempt, deliberately. GitHub does not let anyone approve their own proposed change, so with a single reviewer an enforced rule would lock the repository. **Turn the administrator exemption off as soon as a second reviewer exists.**
 
-**Before inviting contributors, two things need doing.** Name a reviewer in
-`.github/CODEOWNERS`, and turn on a branch protection rule on `main` requiring
-one approving review. Without both, the approval step is decorative and this
-becomes a spreadsheet with extra steps.
+### Status
 
-A review queue with nobody reading it fills up with unchecked rows and stops
-being worth anything. That is the failure this repository is designed to
-prevent, and it is the one thing the tooling cannot do on its own.
+Seeded with checked references and the full evidence review. It is a working collection, not a finished one.
 
-## Not medical advice
-
-See [DISCLAIMER.md](DISCLAIMER.md).
+The thing that decides whether this is worth anything in two years is not the tooling. It is whether someone is reading the review queue. A queue nobody reads fills up with unchecked entries, and then this is a spreadsheet with extra steps.

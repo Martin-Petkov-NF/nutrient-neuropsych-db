@@ -1,0 +1,55 @@
+name: Suggest a correction
+description: Tell us an entry is wrong, out of date, or overstated. No GitHub or coding knowledge needed.
+title: "[correction] "
+labels: ["correction", "needs review"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this if something already in the database looks wrong to you.
+
+        Corrections are the most valuable thing anyone sends. Most of what is in here
+        exists because someone traced a widely repeated figure back to its source and
+        found it did not say what everyone thought. If you think we have done the same
+        thing, please say so.
+
+        You do not need to be certain. "This looks off and here is why" is enough.
+
+  - type: input
+    id: what
+    attributes:
+      label: What are you correcting?
+      description: The entry id from the database, or the document and the sentence. Quoting the sentence is the easiest way.
+      placeholder: "Entry 2, or: nutrient-table.md, the line saying folate deficiency is under 1%"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem is it?
+      options:
+        - The number is wrong
+        - The source does not say this
+        - The source is unreliable or conflicted
+        - There is newer or better evidence
+        - It is overstated, the evidence is weaker than the wording
+        - It is understated, the evidence is stronger than the wording
+        - The identifier points to the wrong paper
+        - Something else
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: What should it say instead, and why?
+      description: If you have a source, give the PubMed ID or DOI. If you do not, say so and describe what you found.
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Supporting PubMed ID or DOI, if you have one
+      placeholder: "31504109"

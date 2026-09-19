@@ -1,0 +1,28 @@
+name: Ask a question
+description: Anything else. Questions about the evidence, how to use this, or how to help.
+title: "[question] "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        No wrong questions here. If you are not sure which form to use, use this one.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: What would you like to ask?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: about
+    attributes:
+      label: Roughly what is it about?
+      description: Optional. It just helps route the answer.
+      options:
+        - The evidence on a specific nutrient
+        - How to read or use the database
+        - How to contribute
+        - Reusing this in a course, article or guide
+        - Something else

@@ -250,7 +250,13 @@ And the sex claim runs the wrong way. Women had **better** functional B12 status
 
 Both are assessed in full in [drugs-and-absorption.md](drugs-and-absorption.md). In summary.
 
-**Transdermal vitamin D, B complex and magnesium for people with impaired digestion.** Not supported. The two human comparative studies both found patches inferior to oral supplements. Magnesium has one small pilot whose result was null. Vitamin D has a single unreplicated trial with no human replication among the papers citing it. The regulatory position closes it: a dietary supplement is by definition intended for ingestion, so a topical product cannot be one, and a transdermal system delivering a substance systemically is a drug requiring approval. No vitamin or mineral has been through that pathway.
+**Transdermal vitamin D, B complex and magnesium for people with impaired digestion.** Not supported, and the detail matters because this is the claim most likely to be checked.
+
+Where a patch has been compared against swallowing, the patch lost: 82% of patch users deficient at one year after gastric bypass against 41% on pills, though from a retrospective review of 44 patients rather than a trial ([PMID 31302845](https://pubmed.ncbi.nlm.nih.gov/31302845/)), and no ferritin response in runners where oral iron worked ([PMID 32217791](https://pubmed.ncbi.nlm.nih.gov/32217791/)). The strongest study is a genuine randomized trial in 444 infants and it is largely null ([PMID 34493339](https://pubmed.ncbi.nlm.nih.gov/34493339/)). Magnesium has two human studies measuring magnesium and both found no change ([PMID 28403154](https://pubmed.ncbi.nlm.nih.gov/28403154/), [PMID 37486715](https://pubmed.ncbi.nlm.nih.gov/37486715/)). **Transdermal B12 in humans has never been studied at all**, which for a route recommended to people with absorption problems is the finding.
+
+Vitamin D is the exception and does not carry the weight put on it. Two randomized trials report large rises ([PMID 24711745](https://pubmed.ncbi.nlm.nih.gov/24711745/), [PMID 30144887](https://pubmed.ncbi.nlm.nih.gov/30144887/)), both from one institution testing one proprietary product with no independent replication.
+
+The regulatory position closes it. A dietary supplement is defined in statute as intended for ingestion, so a topical product cannot be one, and a new route of administration makes a known substance a new drug requiring approval.
 
 **Dairy, tea, coffee and calcium blocking iron absorption.** True over one meal, and the effect is large. Not shown to matter over time, which is the question that counts. **Six months of daily calcium supplementation produced no change in hemoglobin, hematocrit or ferritin in iron-replete adults** ([PMID 9665102](https://pubmed.ncbi.nlm.nih.gov/9665102/)). The advice that survives is narrow: someone treating diagnosed iron deficiency should take the supplement away from calcium, tea and coffee.
 
