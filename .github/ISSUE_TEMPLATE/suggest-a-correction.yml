@@ -1,7 +1,7 @@
 name: Suggest a correction
 description: Tell us an entry is wrong, out of date, or overstated. No GitHub or coding knowledge needed.
 title: "[correction] "
-labels: ["correction", "needs review"]
+labels: ["correction"]
 body:
   - type: markdown
     attributes:

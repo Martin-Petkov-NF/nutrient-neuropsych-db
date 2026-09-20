@@ -1,0 +1,38 @@
+name: Review queue
+
+# Keeps one standing issue listing entries that are in the database but that
+# nobody has read yet, so a growing backlog is visible rather than silent.
+#
+# Runs weekly, and on any push that changes the data, and on demand.
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"      # Monday 08:00 UTC
+  push:
+    branches: [main]
+    paths: ["data/citations.csv"]
+  workflow_dispatch:
+
+concurrency:
+  group: review-queue
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  queue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Build the queue and sync the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/review-queue.mjs > /tmp/queue.md
+          echo "Waiting: $(node scripts/review-queue.mjs --count)"
+          bash scripts/sync-queue-issue.sh /tmp/queue.md

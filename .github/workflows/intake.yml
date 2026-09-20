@@ -126,7 +126,7 @@ jobs:
           NUM: ${{ steps.issue.outputs.number }}
         run: |
           {
-            echo "Thank you. This has been added to the database."
+            echo "Thank you. This has been added to the database, and is now waiting to be read."
             echo
             python3 - <<'PY'
           import json
@@ -138,18 +138,34 @@ jobs:
               print("Two things a reviewer will look at:\n" if len(v['flag'])>1 else "One thing a reviewer will look at:\n")
               for f in v['flag']: print(f"- {f}")
               print()
-          print("If anything above looks wrong, say so here and it will be corrected.")
+          print("This issue stays open until a reviewer has read the paper. If anything above looks wrong, say so here.")
           PY
           } > /tmp/comment.md
           gh issue comment "$NUM" --repo "$GITHUB_REPOSITORY" --body-file /tmp/comment.md
+
+          # The entry is in the database, but nobody has read the paper. The issue
+          # stays OPEN and becomes the work item for that reading. Closing it here
+          # was the old behaviour and it made the review queue invisible.
           gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" \
-            --add-label "accepted" --remove-label "needs review" --remove-label "needs fix" || true
+            --add-label "not yet read" --remove-label "needs fix" || true
           if [ "${{ steps.intake.outputs.flagged }}" = "true" ]; then
-            gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" --add-label "needs review" || true
+            gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" --add-label "flagged" || true
           fi
-          if [ "${{ steps.tok.outputs.mode }}" = "direct" ]; then
-            gh issue close "$NUM" --repo "$GITHUB_REPOSITORY" --reason completed || true
+
+          # Assign the code owner so a notification actually reaches a person.
+          # In direct-commit mode there is no pull request, so CODEOWNERS never
+          # fires and this assignment is the only signal a reviewer gets.
+          OWNERS=$(grep -hoE '@[A-Za-z0-9-]+' .github/CODEOWNERS | tr -d '@' | sort -u | tr '\n' ',' | sed 's/,$//')
+          if [ -n "$OWNERS" ]; then
+            gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" --add-assignee "$OWNERS" || true
+            echo "Assigned to: $OWNERS"
           fi
+
+      - name: Refresh the review queue
+        if: steps.intake.outputs.accepted == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/review-queue.mjs > /tmp/queue.md && bash scripts/sync-queue-issue.sh || true
 
       # ---------------------------------------------------------------- reject
 

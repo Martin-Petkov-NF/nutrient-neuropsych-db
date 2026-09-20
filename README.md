@@ -47,7 +47,7 @@ Three forms, and you cannot pick the wrong one.
 1. You fill in the form. That is your whole job.
 2. **Within about a minute, automatic checks run and reply to you.** They confirm the paper exists, that it has not been retracted, that it is not already here, and that the details are right. The details are taken from the PubMed record rather than from what you typed, so you cannot get them wrong.
 3. **If everything passes, the entry is added immediately** and marked *not yet read*.
-4. A reviewer later reads the paper, grades the evidence, and marks it verified.
+4. Your issue stays open and is assigned to a reviewer. They read the paper, grade the evidence, mark it verified, and close the issue.
 
 If a check fails you get told exactly what is wrong, in the issue, straight away. Edit the issue and the checks run again. Nothing sits in a queue waiting for someone to tell you there was a typo.
 
@@ -153,6 +153,21 @@ node scripts/intake.mjs --body-file issue.md --dry-run
 Settings, Secrets and variables, Actions, New repository secret. Name it `INTAKE_TOKEN`.
 
 Without that secret the workflow still runs every check and opens a ready-to-merge pull request instead, which is one click. GitHub does not allow the Actions bot to bypass branch protection on a personal repository, only in an organization, so a token is the only route to a genuine auto-merge here.
+
+### The review queue
+
+Accepted entries land as `unreviewed`, and two things make sure someone actually reads them.
+
+The submitting issue is **not closed**. It is labeled `not yet read`, assigned to whoever is named in `CODEOWNERS`, and stays open as the work item. Assignment is what sends the notification. In direct-commit mode there is no pull request, so `CODEOWNERS` never fires on its own and this assignment is the only signal a reviewer gets.
+
+A second workflow keeps one standing **[Review queue](../../issues?q=is%3Aissue+is%3Aopen+label%3A%22review+queue%22)** issue listing every unread entry. It runs weekly, on any change to the data, and on demand. It opens the issue when work arrives, updates it in place, and closes it when the queue empties.
+
+```bash
+node scripts/review-queue.mjs            # the list
+node scripts/review-queue.mjs --count    # just the number
+```
+
+**To review an entry:** read the source, check the summary and the direction against it, write the precise `claim`, set `evidence_grade` and `source_quality_flag`, change `review_status` to `verified`, rebuild the reading view, and close the issue. The validator refuses a verified row that is missing any of those three fields, so the standard is enforced rather than remembered.
 
 ### Review settings
 

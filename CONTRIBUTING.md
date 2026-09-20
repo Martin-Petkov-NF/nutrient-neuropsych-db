@@ -54,6 +54,13 @@ Twenty-three. The first eight are what a contributor supplies. The rest are deri
 
 ## For reviewers
 
+**Where the work arrives.** Two places, and they hold the same items. Each accepted submission stays open as its own issue, labeled `not yet read` and assigned to you. And one standing [Review queue](../../issues?q=is%3Aissue+is%3Aopen+label%3A%22review+queue%22) issue lists every unread entry in one table, rebuilt weekly and whenever the data changes.
+
+An issue also labeled `flagged` means the automatic checks noticed something specific: a study design that disagrees with PubMed, an animal-only study, or a headline copied from the title. Those are worth looking at first.
+
+**Closing the loop.** Set the fields, change `review_status` to `verified`, run `node scripts/build-browse.mjs`, and close the submitting issue. The queue issue closes itself once nothing is waiting.
+
+
 Before marking a row `verified`:
 
 1. Open the source and read at least the abstract, and the methods where the row makes a claim about a number.
