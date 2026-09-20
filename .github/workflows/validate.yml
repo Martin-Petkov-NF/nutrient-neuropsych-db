@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
       # Checks the schema, the controlled vocabularies, duplicates, and that
       # every PMID actually resolves against the live PubMed record.
       - run: node scripts/validate.mjs data/citations.csv

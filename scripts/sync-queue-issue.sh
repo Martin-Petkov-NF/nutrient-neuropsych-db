@@ -34,9 +34,11 @@ if [ -n "$EXISTING" ]; then
   gh issue edit "$EXISTING" --repo "$REPO" --body-file "$BODY_FILE"
   echo "Updated #$EXISTING, $COUNT waiting"
 else
+  # Take the number straight from the URL. Re-querying the issue list races
+  # against GitHub's indexing and silently returned nothing the first time.
   NEW=$(gh issue create --repo "$REPO" --title "$TITLE" --label "$LABEL" --body-file "$BODY_FILE" | tail -1)
+  EXISTING="${NEW##*/}"
   echo "Opened $NEW, $COUNT waiting"
-  EXISTING=$(gh issue list --repo "$REPO" --state open --label "$LABEL" --limit 1 --json number --jq '.[0].number // empty')
 fi
 
 if [ -n "$OWNERS" ] && [ -n "$EXISTING" ]; then
