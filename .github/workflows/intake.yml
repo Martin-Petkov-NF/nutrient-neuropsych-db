@@ -161,12 +161,6 @@ jobs:
             echo "Assigned to: $OWNERS"
           fi
 
-      - name: Refresh the review queue
-        if: steps.intake.outputs.accepted == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: node scripts/review-queue.mjs > /tmp/queue.md && bash scripts/sync-queue-issue.sh || true
-
       # ---------------------------------------------------------------- reject
 
       - name: Explain why it cannot be added yet
