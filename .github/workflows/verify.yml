@@ -1,0 +1,133 @@
+name: Verify an entry
+
+# The reviewer's half of the job, as a form instead of editing a 23-column CSV.
+#
+# This is a workflow_dispatch on purpose rather than an issue form. GitHub shows
+# the "Run workflow" button only to people with write access, so it is genuinely
+# restricted to collaborators. An issue form cannot be hidden: anyone who can see
+# a public repository can see and open every template in it.
+
+on:
+  workflow_dispatch:
+    inputs:
+      entry:
+        description: "Entry number (the # column in the browse view)"
+        required: true
+        type: string
+      grade:
+        description: "How good is the evidence?"
+        required: true
+        type: choice
+        options:
+          - strong
+          - moderate
+          - weak
+          - mechanism-only
+          - disputed
+      flag:
+        description: "Anything about the source a reader should know?"
+        required: true
+        default: ok
+        type: choice
+        options:
+          - ok
+          - industry-funded
+          - predatory-journal
+          - secondary-source
+          - excluded
+      claim:
+        description: "The precise claim, with the numbers"
+        required: true
+        type: string
+      issue:
+        description: "Submitting issue number to close (optional)"
+        required: false
+        type: string
+
+concurrency:
+  group: verify-entry
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Decide which token to use
+        id: tok
+        env:
+          INTAKE_TOKEN: ${{ secrets.INTAKE_TOKEN }}
+        run: |
+          [ -n "$INTAKE_TOKEN" ] && echo "mode=direct" >> "$GITHUB_OUTPUT" || echo "mode=pr" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.INTAKE_TOKEN || github.token }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Set the grade and mark it verified
+        id: verify
+        run: |
+          node scripts/verify-entry.mjs \
+            --id "${{ inputs.entry }}" \
+            --grade "${{ inputs.grade }}" \
+            --flag "${{ inputs.flag }}" \
+            --claim "${{ inputs.claim }}" \
+            --note "Verified by ${{ github.actor }} on $(date -u +%Y-%m-%d)."
+
+      - name: Rebuild and check
+        run: |
+          node scripts/build-browse.mjs
+          node scripts/validate.mjs data/citations.csv
+
+      - name: Commit straight to main
+        if: steps.tok.outputs.mode == 'direct'
+        run: |
+          git config user.name "citation-intake[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/citations.csv docs/browse.md
+          git commit -m "Verify entry ${{ inputs.entry }}: ${{ inputs.grade }}" \
+            -m "Graded by ${{ github.actor }}."
+          git push
+
+      - name: Open a pull request instead
+        if: steps.tok.outputs.mode == 'pr'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BR="verify/entry-${{ inputs.entry }}-$(date -u +%s)"
+          git config user.name "citation-intake[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BR"
+          git add data/citations.csv docs/browse.md
+          git commit -m "Verify entry ${{ inputs.entry }}: ${{ inputs.grade }}"
+          git push -u origin "$BR"
+          gh pr create --base main --head "$BR" \
+            --title "Verify entry ${{ inputs.entry }} (${{ inputs.grade }})" \
+            --body "Graded by @${{ github.actor }} as **${{ inputs.grade }}**, source **${{ inputs.flag }}**.
+
+          Add an \`INTAKE_TOKEN\` secret to skip the pull request and commit directly."
+
+      - name: Close the submitting issue
+        if: inputs.issue != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment "${{ inputs.issue }}" --repo "$GITHUB_REPOSITORY" --body "Read and verified.
+
+          Entry **${{ inputs.entry }}** is graded **${{ inputs.grade }}**, source **${{ inputs.flag }}**.
+
+          > ${{ inputs.claim }}
+
+          Thank you for the submission."
+          gh issue edit "${{ inputs.issue }}" --repo "$GITHUB_REPOSITORY" \
+            --remove-label "not yet read" --remove-label "flagged" || true
+          gh issue close "${{ inputs.issue }}" --repo "$GITHUB_REPOSITORY" --reason completed

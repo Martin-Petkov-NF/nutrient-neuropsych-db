@@ -167,7 +167,11 @@ node scripts/review-queue.mjs            # the list
 node scripts/review-queue.mjs --count    # just the number
 ```
 
-**To review an entry:** read the source, check the summary and the direction against it, write the precise `claim`, set `evidence_grade` and `source_quality_flag`, change `review_status` to `verified`, rebuild the reading view, and close the issue. The validator refuses a verified row that is missing any of those three fields, so the standard is enforced rather than remembered.
+**To review an entry**, read the source, check the summary and the direction against it, then run the **[Verify an entry](../../actions/workflows/verify.yml)** workflow. It is a form: entry number, grade, source flag, the precise claim, and optionally the issue to close. It writes the row, rebuilds the reading view, runs the validator, and closes the submitting issue with a comment.
+
+That workflow is deliberately not an issue form. GitHub shows the Run workflow button only to people with write access, so it is genuinely restricted to collaborators. An issue template cannot be hidden, since anyone who can see a public repository can see every template in it.
+
+To do it by hand instead, set `claim`, `evidence_grade` and `source_quality_flag`, change `review_status` to `verified`, and run `node scripts/build-browse.mjs`. The validator refuses a verified row missing any of those three fields, so the standard is enforced rather than remembered.
 
 ### Review settings
 

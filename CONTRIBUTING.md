@@ -58,7 +58,9 @@ Twenty-three. The first eight are what a contributor supplies. The rest are deri
 
 An issue also labeled `flagged` means the automatic checks noticed something specific: a study design that disagrees with PubMed, an animal-only study, or a headline copied from the title. Those are worth looking at first.
 
-**Closing the loop.** Set the fields, change `review_status` to `verified`, run `node scripts/build-browse.mjs`, and close the submitting issue. The queue issue closes itself once nothing is waiting.
+**Closing the loop.** Run the **[Verify an entry](../../actions/workflows/verify.yml)** workflow from the Actions tab. Give it the entry number, the grade, the source flag, the precise claim, and the submitting issue number. It does the rest, including closing the issue. The queue issue closes itself once nothing is waiting.
+
+Only collaborators see that workflow, because GitHub restricts the Run workflow button to people with write access.
 
 
 Before marking a row `verified`:
