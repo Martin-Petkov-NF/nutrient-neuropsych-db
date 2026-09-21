@@ -46,7 +46,7 @@ what the paper actually found. Treat those entries with more caution than verifi
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 25 | Most oral contraceptive users had plasma pyridoxal phosphate below 20 nmol/L, and women of childbearing age had lower levels than comparably aged men whether or not they took supplements. | background | ungraded | ⚠️ **not yet read** | [2008](https://pubmed.ncbi.nlm.nih.gov/18469270/), survey data |
+| 25 | Most oral contraceptive users had plasma pyridoxal phosphate below 20 nmol/L, and women of childbearing age had lower levels than comparably aged men whether or not they took supplements. | background | strong | verified | [2008](https://pubmed.ncbi.nlm.nih.gov/18469270/), survey data |
 
 ## folate (2)
 
