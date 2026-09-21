@@ -89,4 +89,4 @@ what the paper actually found. Treat those entries with more caution than verifi
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 24 | Depressed people have lower blood zinc than controls, by about 1.85 µmol/L across 17 studies, but the heterogeneity is very high and the effect is larger in inpatients than in community samples. | mixed | ungraded | ⚠️ **not yet read** | [2013](https://pubmed.ncbi.nlm.nih.gov/23806573/), systematic review meta analysis |
+| 24 | Depressed people have lower blood zinc than controls, by about 1.85 µmol/L across 17 studies, but the heterogeneity is very high and the effect is larger in inpatients than in community samples. | mixed | weak | verified | [2013](https://pubmed.ncbi.nlm.nih.gov/23806573/), systematic review meta analysis |
