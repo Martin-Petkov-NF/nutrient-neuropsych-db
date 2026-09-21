@@ -21,78 +21,78 @@ what the paper actually found. Treat those entries with more caution than verifi
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 6 | Four out of five confirmed Wernicke cases were never diagnosed while the patient was alive, and only 16% had the classic three symptoms. | supports | strong | verified | [1986](https://pubmed.ncbi.nlm.nih.gov/3701343/), case series |
-| 7 | Two of four signs is a better rule than waiting for the classic triad, and it was validated against autopsy findings. | supports | strong | verified | [1997](https://pubmed.ncbi.nlm.nih.gov/9010400/), case control |
+| 6 | Four out of five confirmed Wernicke cases were never diagnosed while the patient was alive, and only 16% had the classic three symptoms. | supports | strong | verified | [Harper et al. (1986)](https://pubmed.ncbi.nlm.nih.gov/3701343/), case series |
+| 7 | Two of four signs is a better rule than waiting for the classic triad, and it was validated against autopsy findings. | supports | strong | verified | [Caine et al. (1997)](https://pubmed.ncbi.nlm.nih.gov/9010400/), case control |
 
 ## b12 (6)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 1 | Vitamin B12 deficiency in older adults produces neuropsychiatric presentations that are readily mistaken for primary psychiatric illness. | supports | moderate | verified | [2012](https://doi.org/10.1176/appi.neuropsych.11020052), narrative review |
-| 3 | Serum B12 alone misses deficiency. Methylmalonic acid and holotranscobalamin detect it earlier, which matters because the neurological damage can be irreversible. | supports | moderate | verified | [2008](https://pubmed.ncbi.nlm.nih.gov/19623286/), narrative review |
-| 4 | More than a quarter of people with neuropsychiatric damage from B12 deficiency had no anemia and no enlarged red cells, so a normal blood count does not rule it out. | supports | strong | verified | [1988](https://pubmed.ncbi.nlm.nih.gov/3374544/), case series |
-| 5 | How severe the damage becomes tracks how long the diagnosis was missed, which is the most actionable finding in this whole area. | supports | strong | verified | [1991](https://pubmed.ncbi.nlm.nih.gov/1648656/), case series |
-| 17 | Metformin lowers vitamin B12 by about a fifth over four years, with one extra deficiency for every 14 people treated. | supports | strong | verified | [2010](https://pubmed.ncbi.nlm.nih.gov/20488910/), rct |
-| 19 | How common B12 deficiency looks depends almost entirely on which cutoff you pick: the same survey gives anywhere from 3% to 26%. | background | strong | verified | [2011](https://pubmed.ncbi.nlm.nih.gov/21677051/), survey data |
+| 1 | Vitamin B12 deficiency in older adults produces neuropsychiatric presentations that are readily mistaken for primary psychiatric illness. | supports | moderate | verified | [Lachner et al. (2012)](https://doi.org/10.1176/appi.neuropsych.11020052), narrative review |
+| 3 | Serum B12 alone misses deficiency. Methylmalonic acid and holotranscobalamin detect it earlier, which matters because the neurological damage can be irreversible. | supports | moderate | verified | [Herrmann and Obeid (2008)](https://pubmed.ncbi.nlm.nih.gov/19623286/), narrative review |
+| 4 | More than a quarter of people with neuropsychiatric damage from B12 deficiency had no anemia and no enlarged red cells, so a normal blood count does not rule it out. | supports | strong | verified | [Lindenbaum et al. (1988)](https://pubmed.ncbi.nlm.nih.gov/3374544/), case series |
+| 5 | How severe the damage becomes tracks how long the diagnosis was missed, which is the most actionable finding in this whole area. | supports | strong | verified | [Healton et al. (1991)](https://pubmed.ncbi.nlm.nih.gov/1648656/), case series |
+| 17 | Metformin lowers vitamin B12 by about a fifth over four years, with one extra deficiency for every 14 people treated. | supports | strong | verified | [de Jager et al. (2010)](https://pubmed.ncbi.nlm.nih.gov/20488910/), rct |
+| 19 | How common B12 deficiency looks depends almost entirely on which cutoff you pick: the same survey gives anywhere from 3% to 26%. | background | strong | verified | [Bailey et al. (2011)](https://pubmed.ncbi.nlm.nih.gov/21677051/), survey data |
 
 ## b3-niacin (2)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 8 | Pellagra was found at autopsy in 27% of people with chronic alcoholism and had been diagnosed in life in none of them, because most had no rash. | supports | strong | verified | [1981](https://pubmed.ncbi.nlm.nih.gov/7229643/), case series |
-| 9 | Alcoholic pellagra encephalopathy presents as confusion, rigidity and myoclonus, and is routinely missed because other alcohol-related conditions are present at the same time. | supports | moderate | verified | [1988](https://pubmed.ncbi.nlm.nih.gov/3401685/), case series |
+| 8 | Pellagra was found at autopsy in 27% of people with chronic alcoholism and had been diagnosed in life in none of them, because most had no rash. | supports | strong | verified | [Ishii et al. (1981)](https://pubmed.ncbi.nlm.nih.gov/7229643/), case series |
+| 9 | Alcoholic pellagra encephalopathy presents as confusion, rigidity and myoclonus, and is routinely missed because other alcohol-related conditions are present at the same time. | supports | moderate | verified | [Serdaru et al. (1988)](https://pubmed.ncbi.nlm.nih.gov/3401685/), case series |
 
 ## b6 (1)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 25 | Most oral contraceptive users had plasma pyridoxal phosphate below 20 nmol/L, and women of childbearing age had lower levels than comparably aged men whether or not they took supplements. | background | strong | verified | [2008](https://pubmed.ncbi.nlm.nih.gov/18469270/), survey data |
+| 25 | Most oral contraceptive users had plasma pyridoxal phosphate below 20 nmol/L, and women of childbearing age had lower levels than comparably aged men whether or not they took supplements. | background | strong | verified | [Morris et al. (2008)](https://pubmed.ncbi.nlm.nih.gov/18469270/), survey data |
 
 ## folate (2)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 2 | Frank folate deficiency has been under 1% of the US population since fortification. The often-quoted 20% figure is folate insufficiency in women of childbearing age, defined by neural tube defect risk, not by any mental health threshold. | background | strong | verified | [2019](https://pubmed.ncbi.nlm.nih.gov/31504109/), survey data |
-| 18 | Adding folic acid to antidepressants did not help, and the treated group scored slightly worse on mental health. | **does not support** | strong | verified | [2014](https://pubmed.ncbi.nlm.nih.gov/25052890/), rct |
+| 2 | Frank folate deficiency has been under 1% of the US population since fortification. The often-quoted 20% figure is folate insufficiency in women of childbearing age, defined by neural tube defect risk, not by any mental health threshold. | background | strong | verified | [Pfeiffer et al. (2019)](https://pubmed.ncbi.nlm.nih.gov/31504109/), survey data |
+| 18 | Adding folic acid to antidepressants did not help, and the treated group scored slightly worse on mental health. | **does not support** | strong | verified | [Bedson et al. (2014)](https://pubmed.ncbi.nlm.nih.gov/25052890/), rct |
 
 ## iron (3)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 11 | Intravenous iron genuinely helps restless legs syndrome, but at ferritin thresholds far above any definition of deficiency. | supports | strong | verified | [2018](https://pubmed.ncbi.nlm.nih.gov/29425576/), guideline |
-| 12 | Iron repletion reduced fatigue in non-anemic women with low iron, and did nothing at all for depression or anxiety. | mixed | moderate | verified | [2012](https://pubmed.ncbi.nlm.nih.gov/22777991/), rct |
-| 23 | Five out of six people with iron deficiency are not anemic, so screening on hemoglobin misses most of them. | background | strong | verified | [2023](https://pubmed.ncbi.nlm.nih.gov/37367984/), survey data |
+| 11 | Intravenous iron genuinely helps restless legs syndrome, but at ferritin thresholds far above any definition of deficiency. | supports | strong | verified | [Allen et al. (2018)](https://pubmed.ncbi.nlm.nih.gov/29425576/), guideline |
+| 12 | Iron repletion reduced fatigue in non-anemic women with low iron, and did nothing at all for depression or anxiety. | mixed | moderate | verified | [Vaucher et al. (2012)](https://pubmed.ncbi.nlm.nih.gov/22777991/), rct |
+| 23 | Five out of six people with iron deficiency are not anemic, so screening on hemoglobin misses most of them. | background | strong | verified | [Weyand et al. (2023)](https://pubmed.ncbi.nlm.nih.gov/37367984/), survey data |
 
 ## magnesium (2)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 13 | The apparent benefit of magnesium for mood collapses once a placebo is introduced, from 1.60 standard deviations to 0.21. | **does not support** | strong | verified | [2018](https://pubmed.ncbi.nlm.nih.gov/29897029/), systematic review meta analysis |
-| 16 | Proton pump inhibitors can cause severe magnesium depletion, proven by symptoms resolving within days of stopping and returning within days of restarting. | supports | strong | verified | [2012](https://pubmed.ncbi.nlm.nih.gov/22762246/), systematic review |
+| 13 | The apparent benefit of magnesium for mood collapses once a placebo is introduced, from 1.60 standard deviations to 0.21. | **does not support** | strong | verified | [Phelan et al. (2018)](https://pubmed.ncbi.nlm.nih.gov/29897029/), systematic review meta analysis |
+| 16 | Proton pump inhibitors can cause severe magnesium depletion, proven by symptoms resolving within days of stopping and returning within days of restarting. | supports | strong | verified | [Hess et al. (2012)](https://pubmed.ncbi.nlm.nih.gov/22762246/), systematic review |
 
 ## multiple (2)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 20 | After gastric bypass, people using a vitamin patch had roughly twice the rate of deficiency of people taking pills. | **does not support** | weak | verified | [2019](https://pubmed.ncbi.nlm.nih.gov/31302845/), cross sectional |
-| 21 | The only large randomized test of nutrients absorbed through the skin found essentially nothing, in 444 infants over a year. | **does not support** | strong | verified | [2021](https://pubmed.ncbi.nlm.nih.gov/34493339/), rct |
+| 20 | After gastric bypass, people using a vitamin patch had roughly twice the rate of deficiency of people taking pills. | **does not support** | weak | verified | [Saurabh et al. (2019)](https://pubmed.ncbi.nlm.nih.gov/31302845/), cross sectional |
+| 21 | The only large randomized test of nutrients absorbed through the skin found essentially nothing, in 444 infants over a year. | **does not support** | strong | verified | [Apte et al. (2021)](https://pubmed.ncbi.nlm.nih.gov/34493339/), rct |
 
 ## omega-3 (2)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 14 | Cochrane found a small effect of omega-3 on depression, called it unlikely to be clinically meaningful, and warned the estimate is probably biased toward a positive result. | mixed | weak | verified | [2021](https://pubmed.ncbi.nlm.nih.gov/34817851/), systematic review meta analysis |
-| 15 | In the largest trial, people given omega-3 had a slightly higher risk of depression than people given placebo. | **does not support** | strong | verified | [2021](https://pubmed.ncbi.nlm.nih.gov/34932079/), rct |
+| 14 | Cochrane found a small effect of omega-3 on depression, called it unlikely to be clinically meaningful, and warned the estimate is probably biased toward a positive result. | mixed | weak | verified | [Appleton et al. (2021)](https://pubmed.ncbi.nlm.nih.gov/34817851/), systematic review meta analysis |
+| 15 | In the largest trial, people given omega-3 had a slightly higher risk of depression than people given placebo. | **does not support** | strong | verified | [Okereke et al. (2021)](https://pubmed.ncbi.nlm.nih.gov/34932079/), rct |
 
 ## vitamin-d (2)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 10 | The largest trial ever run found vitamin D did not prevent depression, in more than 18,000 adults followed over five years. | **does not support** | strong | verified | [2020](https://pubmed.ncbi.nlm.nih.gov/32749491/), rct |
-| 22 | Vitamin D deficiency peaks in adults aged 20 to 39, which is the opposite of what most people assume. | background | strong | verified | [2019](https://pubmed.ncbi.nlm.nih.gov/31076739/), survey data |
+| 10 | The largest trial ever run found vitamin D did not prevent depression, in more than 18,000 adults followed over five years. | **does not support** | strong | verified | [Okereke et al. (2020)](https://pubmed.ncbi.nlm.nih.gov/32749491/), rct |
+| 22 | Vitamin D deficiency peaks in adults aged 20 to 39, which is the opposite of what most people assume. | background | strong | verified | [Herrick et al. (2019)](https://pubmed.ncbi.nlm.nih.gov/31076739/), survey data |
 
 ## zinc (1)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
-| 24 | Depressed people have lower blood zinc than controls, by about 1.85 µmol/L across 17 studies, but the heterogeneity is very high and the effect is larger in inpatients than in community samples. | mixed | weak | verified | [2013](https://pubmed.ncbi.nlm.nih.gov/23806573/), systematic review meta analysis |
+| 24 | Depressed people have lower blood zinc than controls, by about 1.85 µmol/L across 17 studies, but the heterogeneity is very high and the effect is larger in inpatients than in community samples. | mixed | weak | verified | [Swardfager et al. (2013)](https://pubmed.ncbi.nlm.nih.gov/23806573/), systematic review meta analysis |

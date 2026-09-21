@@ -31,6 +31,25 @@ function parseCsv(text) {
   return rows.filter(r => r.length > 1 || r[0] !== '');
 }
 
+// Turns a citation string into a short author credit: "Harper et al.",
+// "Herrmann and Obeid", or a bare surname. The author block is everything
+// before the title, which ends at the first period following initials or
+// "et al". Surnames can be several words, as in "de Jager J", so the surname
+// is whatever precedes the initials rather than the first word.
+function authorCredit(citation) {
+  const block = (citation.match(/^(.*?(?:et al|[A-Z]{1,3}))\.\s/) || [])[1];
+  if (!block) return '';
+  const surnameOf = (s) => {
+    const m = s.trim().match(/^(.*?)[,]?\s+(?:[A-Z]{1,3}\b|et al\b)/);
+    return (m ? m[1] : s.trim().split(/\s+/)[0]).trim();
+  };
+  if (/\bet al\b/.test(block)) return `${surnameOf(block)} et al.`;
+  const authors = block.split(/,\s*/).filter(Boolean);
+  if (authors.length === 1) return surnameOf(authors[0]);
+  if (authors.length === 2) return `${surnameOf(authors[0])} and ${surnameOf(authors[1])}`;
+  return `${surnameOf(authors[0])} et al.`;
+}
+
 const rows = parseCsv(readFileSync(SRC, 'utf8'));
 const head = rows.shift();
 const col = Object.fromEntries(head.map((h, i) => [h, i]));
@@ -82,9 +101,11 @@ for (const [nutrient, items] of [...byNutrient.entries()].sort()) {
     const pmid = cell(r, 'pmid');
     const doi = cell(r, 'doi');
     const year = cell(r, 'year');
+    const who = authorCredit(cell(r, 'citation'));
+    const label = who ? `${who} (${year})` : year;
     const link = pmid
-      ? `[${year}](https://pubmed.ncbi.nlm.nih.gov/${pmid}/)`
-      : doi ? `[${year}](https://doi.org/${doi})` : year;
+      ? `[${label}](https://pubmed.ncbi.nlm.nih.gov/${pmid}/)`
+      : doi ? `[${label}](https://doi.org/${doi})` : label;
     const design = cell(r, 'study_design').replace(/-/g, ' ');
     const st = cell(r, 'review_status');
     const status = st === 'verified' ? 'verified'
