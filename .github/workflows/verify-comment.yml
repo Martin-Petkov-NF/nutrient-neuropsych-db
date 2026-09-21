@@ -1,0 +1,133 @@
+name: Verify from a comment
+
+# Lets a reviewer verify an entry by commenting on its own submitting issue, so
+# they never look up or retype an entry number. The number comes from a marker
+# the intake bot left in the issue.
+#
+# Access is checked here rather than hidden. Anyone can comment on a public
+# issue, so the workflow confirms the commenter has write access and declines
+# politely if not. Hiding the instructions would not have stopped anyone.
+
+on:
+  issue_comment:
+    types: [created, edited]
+
+concurrency:
+  group: verify-comment-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  verify:
+    # Cheap early exit so ordinary conversation does not start a runner.
+    if: startsWith(github.event.comment.body, '/verify')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Decide which token to use
+        id: tok
+        env:
+          INTAKE_TOKEN: ${{ secrets.INTAKE_TOKEN }}
+        run: |
+          [ -n "$INTAKE_TOKEN" ] && echo "mode=direct" >> "$GITHUB_OUTPUT" || echo "mode=pr" >> "$GITHUB_OUTPUT"
+
+      - name: Check the commenter may do this
+        id: perm
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WHO: ${{ github.event.comment.user.login }}
+        run: |
+          LEVEL=$(gh api "repos/$GITHUB_REPOSITORY/collaborators/$WHO/permission" --jq .permission 2>/dev/null || echo none)
+          echo "level=$LEVEL" >> "$GITHUB_OUTPUT"
+          echo "$WHO has: $LEVEL"
+
+      - name: Decline politely
+        if: steps.perm.outputs.level != 'admin' && steps.perm.outputs.level != 'write'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body "Thanks, but verifying an entry is limited to repository collaborators, because it asserts that a person has read the paper and graded the evidence.
+
+          If you think this entry is wrong or the grade is off, please open a **Suggest a correction** issue. Corrections are the most useful thing anyone sends here."
+          exit 0
+
+      - uses: actions/checkout@v4
+        if: steps.perm.outputs.level == 'admin' || steps.perm.outputs.level == 'write'
+        with:
+          token: ${{ secrets.INTAKE_TOKEN || github.token }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        if: steps.perm.outputs.level == 'admin' || steps.perm.outputs.level == 'write'
+        with:
+          node-version: "22"
+
+      - name: Apply the verification
+        id: apply
+        if: steps.perm.outputs.level == 'admin' || steps.perm.outputs.level == 'write'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ACTOR: ${{ github.event.comment.user.login }}
+          # Passed as an environment variable, never interpolated into the
+          # script. A comment is untrusted input and anyone can write one.
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          gh issue view "$ISSUE_NUMBER" --repo "$GITHUB_REPOSITORY" --json body,comments > /tmp/issue.json
+          printf '%s' "$COMMENT_BODY" > /tmp/comment.md
+          node scripts/verify-from-comment.mjs --comment /tmp/comment.md --issue /tmp/issue.json > /tmp/reply.md
+          echo "ok=true" >> "$GITHUB_OUTPUT"
+
+      - name: Report a refusal and stop
+        if: steps.apply.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body-file /tmp/reply.md
+          echo "Refused, nothing changed."
+
+      - name: Rebuild and check
+        if: steps.apply.outputs.ok == 'true'
+        run: |
+          node scripts/build-browse.mjs
+          node scripts/validate.mjs data/citations.csv
+
+      - name: Commit straight to main
+        if: steps.apply.outputs.ok == 'true' && steps.tok.outputs.mode == 'direct'
+        run: |
+          git config user.name "citation-intake[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/citations.csv docs/browse.md
+          git commit -m "Verify entry ${{ steps.apply.outputs.applied }}: ${{ steps.apply.outputs.grade }}" \
+            -m "Graded by ${{ github.event.comment.user.login }} from #${{ github.event.issue.number }}."
+          git push
+
+      - name: Open a pull request instead
+        if: steps.apply.outputs.ok == 'true' && steps.tok.outputs.mode == 'pr'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BR="verify/issue-${{ github.event.issue.number }}-$(date -u +%s)"
+          git config user.name "citation-intake[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BR"
+          git add data/citations.csv docs/browse.md
+          git commit -m "Verify entry ${{ steps.apply.outputs.applied }}: ${{ steps.apply.outputs.grade }}"
+          git push -u origin "$BR"
+          gh pr create --base main --head "$BR" \
+            --title "Verify entry ${{ steps.apply.outputs.applied }} (${{ steps.apply.outputs.grade }})" \
+            --body "Graded by @${{ github.event.comment.user.login }} from #${{ github.event.issue.number }}."
+
+      - name: Confirm and close the issue
+        if: steps.apply.outputs.ok == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body-file /tmp/reply.md
+          gh issue edit "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" \
+            --remove-label "not yet read" --remove-label "flagged" || true
+          gh issue close "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --reason completed

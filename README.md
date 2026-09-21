@@ -167,7 +167,20 @@ node scripts/review-queue.mjs            # the list
 node scripts/review-queue.mjs --count    # just the number
 ```
 
-**To review an entry**, read the source, check the summary and the direction against it, then run the **[Verify an entry](../../actions/workflows/verify.yml)** workflow. It is a form: entry number, grade, source flag, the precise claim, and optionally the issue to close. It writes the row, rebuilds the reading view, runs the validator, and closes the submitting issue with a comment.
+**To review an entry, comment on its own issue.** Each accepted submission is assigned to you and carries a ready-to-edit block at the bottom of the bot's reply. Edit the three values and post it:
+
+```
+/verify
+grade: weak
+flag: ok
+claim: Meta-analysis of 17 studies, zinc 1.85 umol/L lower in depressed subjects, heterogeneity 88%.
+```
+
+**You never type an entry number.** It is read from a marker the intake bot left in the issue, which removes that whole class of mistake. The workflow writes the row, rebuilds the reading view, runs the validator, comments with what it did, and closes the issue. If the grade or flag is not a valid value, or the claim is too short, it changes nothing and tells you why.
+
+Only collaborators can do this. Anyone can comment on a public issue, so the workflow checks permission and declines politely, pointing the person at the correction form instead.
+
+For a seed entry with no submitting issue, use the **[Verify an entry](../../actions/workflows/verify.yml)** workflow in the Actions tab, which takes the entry number by hand.
 
 That workflow is deliberately not an issue form. GitHub shows the Run workflow button only to people with write access, so it is genuinely restricted to collaborators. An issue template cannot be hidden, since anyone who can see a public repository can see every template in it.
 

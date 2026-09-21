@@ -138,7 +138,17 @@ jobs:
               print("Two things a reviewer will look at:\n" if len(v['flag'])>1 else "One thing a reviewer will look at:\n")
               for f in v['flag']: print(f"- {f}")
               print()
-          print("This issue stays open until a reviewer has read the paper. If anything above looks wrong, say so here.")
+          print("This issue stays open until a reviewer has read the paper. If anything above looks wrong, say so here.\n")
+          print("---\n")
+          print("**For the reviewer.** Once you have read the paper, copy the block below into a comment, edit the three values, and post it. No entry number to look up, and nothing to install.\n")
+          print("```")
+          print("/verify")
+          print("grade: weak")
+          print("flag: ok")
+          print("claim: ")
+          print("```\n")
+          print("`grade` is one of strong, moderate, weak, mechanism-only, disputed. `flag` is one of ok, industry-funded, predatory-journal, secondary-source, excluded. `claim` is the precise restatement with the numbers.\n")
+          print(f"<!-- entries: {','.join(v['ids'])} -->")
           PY
           } > /tmp/comment.md
           gh issue comment "$NUM" --repo "$GITHUB_REPOSITORY" --body-file /tmp/comment.md
