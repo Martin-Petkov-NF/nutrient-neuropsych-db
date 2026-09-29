@@ -49,7 +49,7 @@ const multi = (v) => (v || '').split(',').map((s) => s.trim()).filter(Boolean);
 
 // ---------------------------------------------------------------- vocabularies
 
-const NUTRIENTS = ['vitamin-d','b12','folate','b1-thiamine','b6','b3-niacin','b2-riboflavin','iron','magnesium','zinc','calcium','copper','vitamin-c','vitamin-e','potassium','iodine','omega-3','multiple'];
+const NUTRIENTS = ['vitamin-d','b12','folate','b1-thiamine','b6','b3-niacin','b2-riboflavin','iron','magnesium','zinc','calcium','copper','vitamin-c','vitamin-e','potassium','iodine','omega-3','multiple','none'];
 const TOPICS = ['neuropsychiatric','pain','absorption','drug-nutrient','prevalence','testing'];
 const DESIGNS = ['systematic-review-meta-analysis','systematic-review','rct','non-randomized-trial','prospective-cohort','case-control','cross-sectional','case-series','case-report','narrative-review','guideline','survey-data','animal','in-vitro'];
 const DIRECTIONS = ['supports','does-not-support','mixed','null-result','background'];
@@ -165,7 +165,11 @@ const form = parseIssueForm(readFileSync(bodyFile, 'utf8'));
 
 const rawId = (form[FIELD.identifier] || '').trim();
 const headline = (form[FIELD.headline] || '').trim();
-const nutrients = multi(form[FIELD.nutrient]);
+let nutrients = multi(form[FIELD.nutrient]);
+// "none" is for a general paper that names no specific nutrient. Ticked
+// alongside real nutrients it contradicts them, so keep the real ones.
+const noneWithOthers = nutrients.includes('none') && nutrients.length > 1;
+if (noneWithOthers) nutrients = nutrients.filter((n) => n !== 'none');
 const topics = multi(form[FIELD.topic]);
 const design = (form[FIELD.design] || '').trim();
 const direction = (form[FIELD.direction] || '').trim();
@@ -219,6 +223,7 @@ if (meta) {
     flag.push('The headline phrase is the paper title copied. It is meant to be your own sentence saying what the paper found.');
   }
   if (headline.length < 25) flag.push('The headline phrase is very short. One full sentence reads better in the table.');
+  if (noneWithOthers) flag.push('"none" was ticked alongside specific nutrients, so it was dropped and the specific ones kept.');
   if (meta.pmc && meta.pmcStatus?.live === false) {
     flag.push(`The full text is embargoed at PubMed Central${meta.pmcStatus.embargoedUntil ? ` until ${meta.pmcStatus.embargoedUntil}` : ''}, so only the abstract can be read for now. The entry is recorded as not open access and links to PubMed. A reviewer who can reach the paper through the journal can grade it sooner.`);
   }

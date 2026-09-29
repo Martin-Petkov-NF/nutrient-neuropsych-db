@@ -12,7 +12,7 @@ Twenty-three. The first eight are what a contributor supplies. The rest are deri
 |---|---|---|---|
 | `id` | Auto | No | Sequential. Never reused, even after a deletion |
 | `headline_phrase` | Contributor | No | One sentence, in your own words, saying what this paper found. Not the title and not the abstract. Displayed first and displayed bold |
-| `nutrient` | Contributor | Yes | One per row in the data. On the submission form you may tick several and a reviewer splits them, so you submit once |
+| `nutrient` | Contributor | Yes | One per row in the data. On the submission form you may tick several and a reviewer splits them, so you submit once. Use `none` for a general paper that names no specific nutrient, such as a lifestyle guideline |
 | `topic` | Contributor | Yes | `neuropsychiatric`, `pain`, `absorption`, `drug-nutrient`, `prevalence`, `testing` |
 | `claim` | Contributor | No | What the paper claims, stated flatly. The precise version of the headline phrase |
 | `population` | Contributor | No | Age, sex, country, health status |

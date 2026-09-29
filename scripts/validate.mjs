@@ -22,7 +22,7 @@ const COLUMNS = [
 const REQUIRED = ['id', 'headline_phrase', 'nutrient', 'topic', 'study_design', 'direction', 'contributor', 'date_added', 'review_status'];
 
 const VOCAB = {
-  nutrient: ['vitamin-d', 'b12', 'folate', 'b1-thiamine', 'b6', 'b3-niacin', 'b2-riboflavin', 'iron', 'magnesium', 'zinc', 'calcium', 'copper', 'vitamin-c', 'vitamin-e', 'potassium', 'iodine', 'omega-3', 'multiple'],
+  nutrient: ['vitamin-d', 'b12', 'folate', 'b1-thiamine', 'b6', 'b3-niacin', 'b2-riboflavin', 'iron', 'magnesium', 'zinc', 'calcium', 'copper', 'vitamin-c', 'vitamin-e', 'potassium', 'iodine', 'omega-3', 'multiple', 'none'],
   topic: ['neuropsychiatric', 'pain', 'absorption', 'drug-nutrient', 'prevalence', 'testing'],
   study_design: ['systematic-review-meta-analysis', 'systematic-review', 'rct', 'non-randomized-trial', 'prospective-cohort', 'case-control', 'cross-sectional', 'case-series', 'case-report', 'narrative-review', 'guideline', 'survey-data', 'animal', 'in-vitro'],
   direction: ['supports', 'does-not-support', 'mixed', 'null-result', 'background'],

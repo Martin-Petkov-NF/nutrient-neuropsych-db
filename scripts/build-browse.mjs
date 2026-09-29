@@ -92,8 +92,10 @@ lines.push('PubMed record rather than being retyped. Nobody has confirmed that t
 lines.push('what the paper actually found. Treat those entries with more caution than verified ones.');
 lines.push('');
 
-for (const [nutrient, items] of [...byNutrient.entries()].sort()) {
-  lines.push(`## ${nutrient} (${items.length})`);
+// General papers go last, under a heading that says what "none" means.
+const order = [...byNutrient.entries()].sort(([a], [b]) => (a === 'none') - (b === 'none') || (a < b ? -1 : a > b ? 1 : 0));
+for (const [nutrient, items] of order) {
+  lines.push(`## ${nutrient === 'none' ? 'No specific nutrient' : nutrient} (${items.length})`);
   lines.push('');
   lines.push('| # | What it says | Finding | Strength | Checked | Source |');
   lines.push('|---|---|---|---|---|---|');

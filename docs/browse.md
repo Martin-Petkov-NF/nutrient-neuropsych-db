@@ -70,13 +70,12 @@ what the paper actually found. Treat those entries with more caution than verifi
 | 13 | The apparent benefit of magnesium for mood collapses once a placebo is introduced, from 1.60 standard deviations to 0.21. | **does not support** | strong | verified | [Phelan et al. (2018)](https://pubmed.ncbi.nlm.nih.gov/29897029/), systematic review meta analysis |
 | 16 | Proton pump inhibitors can cause severe magnesium depletion, proven by symptoms resolving within days of stopping and returning within days of restarting. | supports | strong | verified | [Hess et al. (2012)](https://pubmed.ncbi.nlm.nih.gov/22762246/), systematic review |
 
-## multiple (3)
+## multiple (2)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
 | 20 | After gastric bypass, people using a vitamin patch had roughly twice the rate of deficiency of people taking pills. | **does not support** | weak | verified | [Saurabh et al. (2019)](https://pubmed.ncbi.nlm.nih.gov/31302845/), cross sectional |
 | 21 | The only large randomized test of nutrients absorbed through the skin found essentially nothing, in 444 infants over a year. | **does not support** | strong | verified | [Apte et al. (2021)](https://pubmed.ncbi.nlm.nih.gov/34493339/), rct |
-| 26 | Expert consensus statement on lifestyle interventions in major depressive disorder | background | weak | verified | [Merlo et al. (2026)](https://pubmed.ncbi.nlm.nih.gov/41523150/), guideline |
 
 ## omega-3 (2)
 
@@ -97,3 +96,9 @@ what the paper actually found. Treat those entries with more caution than verifi
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
 | 24 | Depressed people have lower blood zinc than controls, by about 1.85 µmol/L across 17 studies, but the heterogeneity is very high and the effect is larger in inpatients than in community samples. | mixed | weak | verified | [Swardfager et al. (2013)](https://pubmed.ncbi.nlm.nih.gov/23806573/), systematic review meta analysis |
+
+## No specific nutrient (1)
+
+| # | What it says | Finding | Strength | Checked | Source |
+|---|---|---|---|---|---|
+| 26 | Expert consensus statement on lifestyle interventions in major depressive disorder | background | weak | verified | [Merlo et al. (2026)](https://pubmed.ncbi.nlm.nih.gov/41523150/), guideline |

@@ -33,7 +33,7 @@ body:
     id: nutrient
     attributes:
       label: Nutrient
-      description: Pick as many as the paper covers. A reviewer will split it into one entry per nutrient, so you only submit once.
+      description: Pick as many as the paper covers. A reviewer will split it into one entry per nutrient, so you only submit once. If the paper is general and names no specific nutrient, pick none.
       multiple: true
       options:
         - vitamin-d
@@ -54,6 +54,7 @@ body:
         - iodine
         - omega-3
         - multiple
+        - none
     validations:
       required: true
 
