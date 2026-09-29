@@ -85,6 +85,8 @@ async function fetchPubmed(pmid) {
   const abstract = [...xml.matchAll(/<AbstractText[^>]*>([\s\S]*?)<\/AbstractText>/g)]
     .map((m) => m[1].replace(/<[^>]+>/g, '')).join(' ').trim();
   const ids = Object.fromEntries((rec.articleids || []).map((a) => [a.idtype, a.value]));
+  let pmcStatus = null;
+  if (ids.pmc) { await sleep(350); pmcStatus = await fetchPmcStatus(ids.pmc); }
   return {
     pmid,
     title: (rec.title || '').replace(/\.$/, ''),
@@ -96,9 +98,35 @@ async function fetchPubmed(pmid) {
     pubtypes: rec.pubtype || [],
     doi: ids.doi || '',
     pmc: ids.pmc || '',
+    pmcStatus,
     mesh,
     abstract,
   };
+}
+
+// A PubMed Central identifier does not mean the full text is readable. Many
+// articles sit under a publisher embargo for a year and PMC holds only the
+// abstract until it lifts. Recording those as open access tells a contributor
+// they can check the row when they cannot, so ask PMC what the status is.
+// Returns null when the question could not be answered, which is different
+// from an answer of no.
+async function fetchPmcStatus(pmcId) {
+  try {
+    const xml = await fetch(`https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pmc&retmode=xml&id=${pmcId}`).then((r) => r.text());
+    const meta = (name) => (xml.match(new RegExp(`<meta-name>${name}</meta-name><meta-value>([^<]*)</meta-value>`)) || [])[1];
+    const live = meta('pmc-status-live');
+    if (live !== 'yes' && live !== 'no') return null;
+    let until = '';
+    const ev = xml.match(/<event event-type="pmc-release">\s*<date>([\s\S]*?)<\/date>/);
+    if (ev) {
+      const part = (t) => (ev[1].match(new RegExp(`<${t}>(\\d+)</${t}>`)) || [])[1];
+      const [y, m, d] = [part('year'), part('month'), part('day')];
+      if (y && m && d) until = `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+    }
+    return { live: live === 'yes', embargoedUntil: live === 'yes' ? '' : until };
+  } catch {
+    return null;
+  }
 }
 
 async function resolveDoi(doi) {
@@ -191,6 +219,12 @@ if (meta) {
     flag.push('The headline phrase is the paper title copied. It is meant to be your own sentence saying what the paper found.');
   }
   if (headline.length < 25) flag.push('The headline phrase is very short. One full sentence reads better in the table.');
+  if (meta.pmc && meta.pmcStatus?.live === false) {
+    flag.push(`The full text is embargoed at PubMed Central${meta.pmcStatus.embargoedUntil ? ` until ${meta.pmcStatus.embargoedUntil}` : ''}, so only the abstract can be read for now. The entry is recorded as not open access and links to PubMed. A reviewer who can reach the paper through the journal can grade it sooner.`);
+  }
+  if (meta.pmc && meta.pmcStatus === null) {
+    flag.push('PubMed Central did not answer when asked whether the full text is readable, so `open_access` has been left blank for a reviewer to set.');
+  }
 }
 
 // Duplicate check against the live data.
@@ -216,6 +250,12 @@ const accepted = reject.length === 0;
 let newRows = [];
 if (accepted && meta) {
   const citation = `${meta.firstAuthor} et al. ${meta.title}. ${meta.journal}. ${meta.year}${meta.volume ? ';' + meta.volume : ''}${meta.pages ? ':' + meta.pages : ''}.`;
+  // Readable means a contributor can open the full text today, not that the
+  // paper carries an open licence. An embargoed PMC record fails this.
+  const readable = Boolean(meta.pmc) && meta.pmcStatus?.live === true;
+  const embargoNote = meta.pmc && meta.pmcStatus?.live === false
+    ? `Full text embargoed at PubMed Central${meta.pmcStatus.embargoedUntil ? ` until ${meta.pmcStatus.embargoedUntil}` : ''}.`
+    : '';
   let id = maxId;
   for (const [n, t] of pairs) {
     if (existing.has(`${meta.pmid}|${n}|${t}`)) continue;
@@ -225,10 +265,12 @@ if (accepted && meta) {
       evidence_grade: '', study_design: design, year: meta.year, pmid: meta.pmid,
       population, n: '', medication_interaction: medication, claim: '',
       journal: meta.journal, citation, doi: meta.doi,
-      url: meta.pmc ? `https://pmc.ncbi.nlm.nih.gov/articles/${meta.pmc}/` : `https://pubmed.ncbi.nlm.nih.gov/${meta.pmid}/`,
-      open_access: meta.pmc ? 'yes' : 'no', source_quality_flag: '',
+      url: readable ? `https://pmc.ncbi.nlm.nih.gov/articles/${meta.pmc}/` : `https://pubmed.ncbi.nlm.nih.gov/${meta.pmid}/`,
+      open_access: readable ? 'yes' : meta.pmcStatus === null && meta.pmc ? '' : 'no',
+      source_quality_flag: '',
       review_status: 'unreviewed', contributor: process.env.SUBMITTER || 'community',
-      date_added: new Date().toISOString().slice(0, 10), notes,
+      date_added: new Date().toISOString().slice(0, 10),
+      notes: [notes, embargoNote].filter(Boolean).join(' '),
     });
   }
 }
