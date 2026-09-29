@@ -76,7 +76,7 @@ what the paper actually found. Treat those entries with more caution than verifi
 |---|---|---|---|---|---|
 | 20 | After gastric bypass, people using a vitamin patch had roughly twice the rate of deficiency of people taking pills. | **does not support** | weak | verified | [Saurabh et al. (2019)](https://pubmed.ncbi.nlm.nih.gov/31302845/), cross sectional |
 | 21 | The only large randomized test of nutrients absorbed through the skin found essentially nothing, in 444 infants over a year. | **does not support** | strong | verified | [Apte et al. (2021)](https://pubmed.ncbi.nlm.nih.gov/34493339/), rct |
-| 26 | Expert consensus statement on lifestyle interventions in major depressive disorder | background | ungraded | ⚠️ **not yet read** | [Merlo et al. (2026)](https://pubmed.ncbi.nlm.nih.gov/41523150/), guideline |
+| 26 | Expert consensus statement on lifestyle interventions in major depressive disorder | background | weak | verified | [Merlo et al. (2026)](https://pubmed.ncbi.nlm.nih.gov/41523150/), guideline |
 
 ## omega-3 (2)
 
