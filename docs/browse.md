@@ -70,12 +70,13 @@ what the paper actually found. Treat those entries with more caution than verifi
 | 13 | The apparent benefit of magnesium for mood collapses once a placebo is introduced, from 1.60 standard deviations to 0.21. | **does not support** | strong | verified | [Phelan et al. (2018)](https://pubmed.ncbi.nlm.nih.gov/29897029/), systematic review meta analysis |
 | 16 | Proton pump inhibitors can cause severe magnesium depletion, proven by symptoms resolving within days of stopping and returning within days of restarting. | supports | strong | verified | [Hess et al. (2012)](https://pubmed.ncbi.nlm.nih.gov/22762246/), systematic review |
 
-## multiple (2)
+## multiple (3)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
 | 20 | After gastric bypass, people using a vitamin patch had roughly twice the rate of deficiency of people taking pills. | **does not support** | weak | verified | [Saurabh et al. (2019)](https://pubmed.ncbi.nlm.nih.gov/31302845/), cross sectional |
 | 21 | The only large randomized test of nutrients absorbed through the skin found essentially nothing, in 444 infants over a year. | **does not support** | strong | verified | [Apte et al. (2021)](https://pubmed.ncbi.nlm.nih.gov/34493339/), rct |
+| 26 | Expert consensus statement on lifestyle interventions in major depressive disorder | background | ungraded | ⚠️ **not yet read** | [Merlo et al. (2026)](https://pubmed.ncbi.nlm.nih.gov/41523150/), guideline |
 
 ## omega-3 (2)
 
@@ -84,13 +85,12 @@ what the paper actually found. Treat those entries with more caution than verifi
 | 14 | Cochrane found a small effect of omega-3 on depression, called it unlikely to be clinically meaningful, and warned the estimate is probably biased toward a positive result. | mixed | weak | verified | [Appleton et al. (2021)](https://pubmed.ncbi.nlm.nih.gov/34817851/), systematic review meta analysis |
 | 15 | In the largest trial, people given omega-3 had a slightly higher risk of depression than people given placebo. | **does not support** | strong | verified | [Okereke et al. (2021)](https://pubmed.ncbi.nlm.nih.gov/34932079/), rct |
 
-## vitamin-d (3)
+## vitamin-d (2)
 
 | # | What it says | Finding | Strength | Checked | Source |
 |---|---|---|---|---|---|
 | 10 | The largest trial ever run found vitamin D did not prevent depression, in more than 18,000 adults followed over five years. | **does not support** | strong | verified | [Okereke et al. (2020)](https://pubmed.ncbi.nlm.nih.gov/32749491/), rct |
 | 22 | Vitamin D deficiency peaks in adults aged 20 to 39, which is the opposite of what most people assume. | background | strong | verified | [Herrick et al. (2019)](https://pubmed.ncbi.nlm.nih.gov/31076739/), survey data |
-| 26 | Lifestyle Interventions for Major Depressive Disorder (MDD): An Expert Consensus Statement From @ACLifeMed American College of Lifestyle Medicine | supports | ungraded | ⚠️ **not yet read** | [Merlo et al. (2026)](https://pubmed.ncbi.nlm.nih.gov/41523150/), systematic review meta analysis |
 
 ## zinc (1)
 
