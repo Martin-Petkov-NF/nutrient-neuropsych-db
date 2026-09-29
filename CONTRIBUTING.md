@@ -27,7 +27,7 @@ Twenty-three. The first eight are what a contributor supplies. The rest are deri
 | `pmid` | Derived | No | The stable handle. Fill this before anything else |
 | `doi` | Derived | No | |
 | `url` | Derived | No | Prefer a PubMed Central link where the paper is open access |
-| `open_access` | Derived | Yes | `yes`, `no`. Means the full text can be opened today, not that the paper carries an open licence. A PubMed Central record under publisher embargo counts as `no`. Matters because a contributor who cannot read a paper cannot check the row |
+| `open_access` | Derived | Yes | `yes`, `no`. Means the full text can be opened today, not that the paper carries an open license. A PubMed Central record under publisher embargo counts as `no`. Matters because a contributor who cannot read a paper cannot check the row |
 | `source_quality_flag` | Reviewer | Yes | `ok`, `industry-funded`, `predatory-journal`, `secondary-source`, `excluded` |
 | `contributor` | Contributor | No | Name or initials |
 | `date_added` | Auto | No | ISO format, 2026-09-19 |

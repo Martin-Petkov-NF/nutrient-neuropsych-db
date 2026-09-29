@@ -256,7 +256,7 @@ let newRows = [];
 if (accepted && meta) {
   const citation = `${meta.firstAuthor} et al. ${meta.title}. ${meta.journal}. ${meta.year}${meta.volume ? ';' + meta.volume : ''}${meta.pages ? ':' + meta.pages : ''}.`;
   // Readable means a contributor can open the full text today, not that the
-  // paper carries an open licence. An embargoed PMC record fails this.
+  // paper carries an open license. An embargoed PMC record fails this.
   const readable = Boolean(meta.pmc) && meta.pmcStatus?.live === true;
   const embargoNote = meta.pmc && meta.pmcStatus?.live === false
     ? `Full text embargoed at PubMed Central${meta.pmcStatus.embargoedUntil ? ` until ${meta.pmcStatus.embargoedUntil}` : ''}.`
