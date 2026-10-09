@@ -1,5 +1,6 @@
 # Every change to the data or the validator needs an approving review.
 # Paired with a branch protection rule on main requiring one approval.
-data/       @Martin-Petkov-NF
+# Any one listed owner can approve.
+data/       @Martin-Petkov-NF @rivkafreeman
 scripts/    @Martin-Petkov-NF
-docs/       @Martin-Petkov-NF
+docs/       @Martin-Petkov-NF @rivkafreeman

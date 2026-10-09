@@ -28,7 +28,7 @@ if [ "$COUNT" -eq 0 ]; then
   exit 0
 fi
 
-OWNERS=$(grep -hoE '@[A-Za-z0-9-]+' .github/CODEOWNERS 2>/dev/null | tr -d '@' | sort -u | tr '\n' ',' | sed 's/,$//' || true)
+OWNERS=$(grep -hoE '@[A-Za-z0-9-]+' .github/CODEOWNERS 2>/dev/null | tr -d '@' | sort -u || true)
 
 if [ -n "$EXISTING" ]; then
   gh issue edit "$EXISTING" --repo "$REPO" --body-file "$BODY_FILE"
@@ -41,6 +41,10 @@ else
   echo "Opened $NEW, $COUNT waiting"
 fi
 
-if [ -n "$OWNERS" ] && [ -n "$EXISTING" ]; then
-  gh issue edit "$EXISTING" --repo "$REPO" --add-assignee "$OWNERS" || true
+# One owner at a time, so a reviewer who has not yet accepted their
+# invitation cannot stop the others being assigned.
+if [ -n "$EXISTING" ]; then
+  for OWNER in $OWNERS; do
+    gh issue edit "$EXISTING" --repo "$REPO" --add-assignee "$OWNER" || echo "Could not assign $OWNER"
+  done
 fi

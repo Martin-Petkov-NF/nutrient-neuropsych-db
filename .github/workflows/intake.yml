@@ -148,6 +148,8 @@ jobs:
           print("claim: ")
           print("```\n")
           print("`grade` is one of strong, moderate, weak, mechanism-only, disputed. `flag` is one of ok, industry-funded, predatory-journal, secondary-source, excluded. `claim` is the precise restatement with the numbers.\n")
+          print("If the contributor chose something wrong on the form, add any of these lines to the same comment and they are corrected as it is verified: `nutrient:`, `topic:`, `design:`, `direction:`, `headline:`.\n")
+          print("If the paper does not belong at all, comment `/reject` with a line `reason:` saying why in a sentence.\n")
           print(f"<!-- entries: {','.join(v['ids'])} -->")
           PY
           } > /tmp/comment.md
@@ -165,11 +167,11 @@ jobs:
           # Assign the code owner so a notification actually reaches a person.
           # In direct-commit mode there is no pull request, so CODEOWNERS never
           # fires and this assignment is the only signal a reviewer gets.
-          OWNERS=$(grep -hoE '@[A-Za-z0-9-]+' .github/CODEOWNERS | tr -d '@' | sort -u | tr '\n' ',' | sed 's/,$//')
-          if [ -n "$OWNERS" ]; then
-            gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" --add-assignee "$OWNERS" || true
-            echo "Assigned to: $OWNERS"
-          fi
+          # One owner at a time, so a reviewer who has not yet accepted their
+          # invitation cannot stop the others being assigned.
+          for OWNER in $(grep -hoE '@[A-Za-z0-9-]+' .github/CODEOWNERS | tr -d '@' | sort -u); do
+            gh issue edit "$NUM" --repo "$GITHUB_REPOSITORY" --add-assignee "$OWNER" && echo "Assigned to: $OWNER" || echo "Could not assign $OWNER"
+          done
 
       # ---------------------------------------------------------------- reject
 

@@ -24,7 +24,7 @@ permissions:
 jobs:
   verify:
     # Cheap early exit so ordinary conversation does not start a runner.
-    if: startsWith(github.event.comment.body, '/verify')
+    if: startsWith(github.event.comment.body, '/verify') || startsWith(github.event.comment.body, '/reject')
     runs-on: ubuntu-latest
     steps:
       - name: Decide which token to use
@@ -49,7 +49,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body "Thanks, but verifying an entry is limited to repository collaborators, because it asserts that a person has read the paper and graded the evidence.
+          gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body "Thanks, but verifying or rejecting an entry is limited to repository collaborators, because it asserts that a person has read the paper and judged the evidence.
 
           If you think this entry is wrong or the grade is off, please open a **Suggest a correction** issue. Corrections are the most useful thing anyone sends here."
           exit 0
@@ -102,8 +102,8 @@ jobs:
           git config user.name "citation-intake[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/citations.csv docs/browse.md
-          git commit -m "Verify entry ${{ steps.apply.outputs.applied }}: ${{ steps.apply.outputs.grade }}" \
-            -m "Graded by ${{ github.event.comment.user.login }} from #${{ github.event.issue.number }}."
+          git commit -m "${{ steps.apply.outputs.verb }} entry ${{ steps.apply.outputs.applied }}: ${{ steps.apply.outputs.grade }}" \
+            -m "By ${{ github.event.comment.user.login }} from #${{ github.event.issue.number }}."
           git push
 
       - name: Open a pull request instead
@@ -116,10 +116,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$BR"
           git add data/citations.csv docs/browse.md
-          git commit -m "Verify entry ${{ steps.apply.outputs.applied }}: ${{ steps.apply.outputs.grade }}"
+          git commit -m "${{ steps.apply.outputs.verb }} entry ${{ steps.apply.outputs.applied }}: ${{ steps.apply.outputs.grade }}"
           git push -u origin "$BR"
           gh pr create --base main --head "$BR" \
-            --title "Verify entry ${{ steps.apply.outputs.applied }} (${{ steps.apply.outputs.grade }})" \
+            --title "${{ steps.apply.outputs.verb }} entry ${{ steps.apply.outputs.applied }} (${{ steps.apply.outputs.grade }})" \
             --body "Graded by @${{ github.event.comment.user.login }} from #${{ github.event.issue.number }}."
 
       - name: Confirm and close the issue
@@ -130,4 +130,4 @@ jobs:
           gh issue comment "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --body-file /tmp/reply.md
           gh issue edit "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" \
             --remove-label "not yet read" --remove-label "flagged" || true
-          gh issue close "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --reason completed
+          gh issue close "${{ github.event.issue.number }}" --repo "$GITHUB_REPOSITORY" --reason "${{ steps.apply.outputs.close }}"

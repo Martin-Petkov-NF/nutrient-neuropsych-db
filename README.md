@@ -178,6 +178,25 @@ claim: Meta-analysis of 17 studies, zinc 1.85 umol/L lower in depressed subjects
 
 **You never type an entry number.** It is read from a marker the intake bot left in the issue, which removes that whole class of mistake. The workflow writes the row, rebuilds the reading view, runs the validator, comments with what it did, and closes the issue. If the grade or flag is not a valid value, or the claim is too short, it changes nothing and tells you why.
 
+**If the contributor chose something wrong on the form**, add the fix to the same comment and it is corrected as the entry is verified. Any of these, each on its own line:
+
+```
+nutrient: none
+topic: neuropsychiatric
+design: guideline
+direction: background
+headline: A panel agreed lifestyle change belongs in depression care.
+```
+
+**If the paper does not belong at all**, reject it instead:
+
+```
+/reject
+reason: A press release, not a paper.
+```
+
+A rejected entry stays in the data file marked `rejected`, so the decision is on record and the same paper is not added again, but it disappears from the reading view.
+
 Only collaborators can do this. Anyone can comment on a public issue, so the workflow checks permission and declines politely, pointing the person at the correction form instead.
 
 For a seed entry with no submitting issue, use the **[Verify an entry](../../actions/workflows/verify.yml)** workflow in the Actions tab, which takes the entry number by hand.
@@ -188,9 +207,9 @@ To do it by hand instead, set `claim`, `evidence_grade` and `source_quality_flag
 
 ### Review settings
 
-`main` is protected. Changes need a proposed change with one approving review from the code owner, and the automatic check has to pass. Force pushes and deletions are blocked.
+`main` is protected. Changes need a proposed change with one approving review from a code owner, and the automatic check has to pass. Force pushes and deletions are blocked. The code owners for the data and the documents are listed in [CODEOWNERS](.github/CODEOWNERS), and any one of them can approve.
 
-Administrators are currently exempt, deliberately. GitHub does not let anyone approve their own proposed change, so with a single reviewer an enforced rule would lock the repository. **Turn the administrator exemption off as soon as a second reviewer exists.**
+Administrators are exempt, deliberately. The intake and verification workflows commit straight to `main` with the owner's token, so enforcing the rule on administrators would stop every submission and every `/verify` from being saved.
 
 ### Status
 
