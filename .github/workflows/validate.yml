@@ -21,3 +21,6 @@ jobs:
       # The reading view is generated from the data. Fail if someone changed
       # the data and did not rebuild it.
       - run: node scripts/build-browse.mjs --check
+      # A form GitHub rejects disappears from the new issue page without any
+      # error a contributor would see. Catch the known cause here.
+      - run: node scripts/check-forms.mjs

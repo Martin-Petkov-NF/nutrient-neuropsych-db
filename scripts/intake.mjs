@@ -165,7 +165,9 @@ const form = parseIssueForm(readFileSync(bodyFile, 'utf8'));
 
 const rawId = (form[FIELD.identifier] || '').trim();
 const headline = (form[FIELD.headline] || '').trim();
-let nutrients = multi(form[FIELD.nutrient]);
+// GitHub reserves the word None in form dropdowns and hides a form that uses
+// it, so the form says "no specific nutrient" and the data says none.
+let nutrients = multi(form[FIELD.nutrient]).map((n) => (n === 'no specific nutrient' ? 'none' : n));
 // "none" is for a general paper that names no specific nutrient. Ticked
 // alongside real nutrients it contradicts them, so keep the real ones.
 const noneWithOthers = nutrients.includes('none') && nutrients.length > 1;
@@ -223,7 +225,7 @@ if (meta) {
     flag.push('The headline phrase is the paper title copied. It is meant to be your own sentence saying what the paper found.');
   }
   if (headline.length < 25) flag.push('The headline phrase is very short. One full sentence reads better in the table.');
-  if (noneWithOthers) flag.push('"none" was ticked alongside specific nutrients, so it was dropped and the specific ones kept.');
+  if (noneWithOthers) flag.push('"No specific nutrient" was ticked alongside specific nutrients, so it was dropped and the specific ones kept.');
   if (meta.pmc && meta.pmcStatus?.live === false) {
     flag.push(`The full text is embargoed at PubMed Central${meta.pmcStatus.embargoedUntil ? ` until ${meta.pmcStatus.embargoedUntil}` : ''}, so only the abstract can be read for now. The entry is recorded as not open access and links to PubMed. A reviewer who can reach the paper through the journal can grade it sooner.`);
   }
