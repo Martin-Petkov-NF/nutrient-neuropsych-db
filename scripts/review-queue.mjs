@@ -50,18 +50,23 @@ if (!pending.length) {
 } else {
   out.push(`**${pending.length} waiting.**`);
   out.push('');
-  out.push('For each one: read the source, check the summary and the direction against it,');
-  out.push('write the precise `claim`, set `evidence_grade` and `source_quality_flag`, then');
-  out.push('change `review_status` to `verified`. The validator will not accept a verified row');
-  out.push('that is missing any of those.');
+  out.push('For each one: open the paper from the **Read it** column and check the summary and');
+  out.push('the direction against it. Then go to the entry\'s own issue, which is assigned to you');
+  out.push(`and listed under [not yet read](https://github.com/${process.env.GITHUB_REPOSITORY || 'Martin-Petkov-NF/nutrient-neuropsych-db'}/issues?q=is%3Aissue+is%3Aopen+label%3A%22not+yet+read%22),`);
+  out.push('and comment `/verify` with the grade, flag and claim, or `/reject` with a reason.');
+  out.push('The bot\'s reply on that issue has a block to copy.');
   out.push('');
-  out.push('| # | Nutrient | What the contributor says it found | Source | Added | By |');
+  out.push('| # | Nutrient | What the contributor says it found | Read it | Added | By |');
   out.push('|---|---|---|---|---|---|');
   for (const r of pending.sort((a, b) => get(a, 'date_added').localeCompare(get(b, 'date_added')))) {
     const pmid = get(r, 'pmid');
-    const src = pmid
-      ? `[${get(r, 'year')}](https://pubmed.ncbi.nlm.nih.gov/${pmid}/)`
-      : get(r, 'doi') ? `[${get(r, 'year')}](https://doi.org/${get(r, 'doi')})` : get(r, 'year');
+    // Link the full text when it is free to read. The PubMed page shows only
+    // the abstract, and a reviewer sent there may conclude they cannot read it.
+    const full = get(r, 'open_access') === 'yes' && get(r, 'url');
+    const src = full
+      ? `[Free full text](${full}) (${get(r, 'year')})`
+      : pmid ? `[Abstract only](https://pubmed.ncbi.nlm.nih.gov/${pmid}/) (${get(r, 'year')})`
+      : get(r, 'doi') ? `[Publisher page](https://doi.org/${get(r, 'doi')}) (${get(r, 'year')})` : get(r, 'year');
     const phrase = get(r, 'headline_phrase').replace(/\|/g, '\\|');
     out.push(`| ${get(r, 'id')} | ${get(r, 'nutrient')} | ${phrase} | ${src} | ${get(r, 'date_added')} | ${get(r, 'contributor')} |`);
   }
