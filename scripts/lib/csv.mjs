@@ -20,7 +20,7 @@ export const stringifyCsv = (rows) => rows.map((r) => r.map(quote).join(',')).jo
 
 export const GRADES = ['strong', 'moderate', 'weak', 'mechanism-only', 'disputed'];
 export const FLAGS = ['ok', 'industry-funded', 'predatory-journal', 'secondary-source', 'excluded'];
-export const NUTRIENTS = ['vitamin-d', 'b12', 'folate', 'b1-thiamine', 'b6', 'b3-niacin', 'b2-riboflavin', 'iron', 'magnesium', 'zinc', 'calcium', 'copper', 'vitamin-c', 'vitamin-e', 'potassium', 'iodine', 'omega-3', 'multiple', 'none'];
+export const NUTRIENTS = ['vitamin-d', 'b12', 'folate', 'b1-thiamine', 'b6', 'b3-niacin', 'b2-riboflavin', 'iron', 'magnesium', 'zinc', 'calcium', 'copper', 'vitamin-c', 'vitamin-e', 'potassium', 'iodine', 'omega-3', 'plant-foods', 'multiple', 'none'];
 export const TOPICS = ['neuropsychiatric', 'pain', 'absorption', 'drug-nutrient', 'prevalence', 'testing'];
 export const DESIGNS = ['systematic-review-meta-analysis', 'systematic-review', 'rct', 'non-randomized-trial', 'prospective-cohort', 'case-control', 'cross-sectional', 'case-series', 'case-report', 'narrative-review', 'guideline', 'survey-data', 'animal', 'in-vitro'];
 export const DIRECTIONS = ['supports', 'does-not-support', 'mixed', 'null-result', 'background'];

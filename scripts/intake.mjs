@@ -49,7 +49,7 @@ const multi = (v) => (v || '').split(',').map((s) => s.trim()).filter(Boolean);
 
 // ---------------------------------------------------------------- vocabularies
 
-const NUTRIENTS = ['vitamin-d','b12','folate','b1-thiamine','b6','b3-niacin','b2-riboflavin','iron','magnesium','zinc','calcium','copper','vitamin-c','vitamin-e','potassium','iodine','omega-3','multiple','none'];
+const NUTRIENTS = ['vitamin-d','b12','folate','b1-thiamine','b6','b3-niacin','b2-riboflavin','iron','magnesium','zinc','calcium','copper','vitamin-c','vitamin-e','potassium','iodine','omega-3','plant-foods','multiple','none'];
 const TOPICS = ['neuropsychiatric','pain','absorption','drug-nutrient','prevalence','testing'];
 const DESIGNS = ['systematic-review-meta-analysis','systematic-review','rct','non-randomized-trial','prospective-cohort','case-control','cross-sectional','case-series','case-report','narrative-review','guideline','survey-data','animal','in-vitro'];
 const DIRECTIONS = ['supports','does-not-support','mixed','null-result','background'];
